@@ -24,16 +24,24 @@
         <entry key="..\:/Users/Lenovo/AndroidStudioProjects/ChatBotApp/app/src/main/res/layout/activity_main.xml" value="0.264" />
         <entry key="..\:/Users/Lenovo/AndroidStudioProjects/ChatBotApp/app/src/main/res/layout/activity_main2.xml" value="0.25" />
         <entry key="..\:/Users/Lenovo/AndroidStudioProjects/ChatBotApp/app/src/main/res/layout/activity_main3.xml" value="0.25" />
+        <entry key="..\:/Users/Lenovo/AndroidStudioProjects/ChatBotApp/app/src/main/res/layout/activity_marks_create.xml" value="0.25" />
+        <entry key="..\:/Users/Lenovo/AndroidStudioProjects/ChatBotApp/app/src/main/res/layout/activity_marks_result.xml" value="0.25" />
+        <entry key="..\:/Users/Lenovo/AndroidStudioProjects/ChatBotApp/app/src/main/res/layout/activity_marks_screen.xml" value="0.25" />
+        <entry key="..\:/Users/Lenovo/AndroidStudioProjects/ChatBotApp/app/src/main/res/layout/activity_marks_search.xml" value="0.25" />
+        <entry key="..\:/Users/Lenovo/AndroidStudioProjects/ChatBotApp/app/src/main/res/layout/activity_marks_student.xml" value="0.25" />
+        <entry key="..\:/Users/Lenovo/AndroidStudioProjects/ChatBotApp/app/src/main/res/layout/activity_marks_update.xml" value="0.25" />
         <entry key="..\:/Users/Lenovo/AndroidStudioProjects/ChatBotApp/app/src/main/res/layout/activity_parent_dashboard_screen.xml" value="0.25" />
         <entry key="..\:/Users/Lenovo/AndroidStudioProjects/ChatBotApp/app/src/main/res/layout/activity_search_and_take_attendance_screen.xml" value="0.25" />
         <entry key="..\:/Users/Lenovo/AndroidStudioProjects/ChatBotApp/app/src/main/res/layout/activity_search_attendance.xml" value="0.2359375" />
         <entry key="..\:/Users/Lenovo/AndroidStudioProjects/ChatBotApp/app/src/main/res/layout/activity_student_dashboard_screen.xml" value="0.25" />
-        <entry key="..\:/Users/Lenovo/AndroidStudioProjects/ChatBotApp/app/src/main/res/layout/activity_update_user.xml" value="0.1" />
+        <entry key="..\:/Users/Lenovo/AndroidStudioProjects/ChatBotApp/app/src/main/res/layout/activity_update_user.xml" value="0.264" />
         <entry key="..\:/Users/Lenovo/AndroidStudioProjects/ChatBotApp/app/src/main/res/layout/activity_users_screen.xml" value="0.25" />
         <entry key="..\:/Users/Lenovo/AndroidStudioProjects/ChatBotApp/app/src/main/res/layout/activity_view_attendance.xml" value="0.2359375" />
         <entry key="..\:/Users/Lenovo/AndroidStudioProjects/ChatBotApp/app/src/main/res/layout/adapter_message_one.xml" value="0.25" />
         <entry key="..\:/Users/Lenovo/AndroidStudioProjects/ChatBotApp/app/src/main/res/layout/attendance_student.xml" value="0.24895833333333334" />
         <entry key="..\:/Users/Lenovo/AndroidStudioProjects/ChatBotApp/app/src/main/res/layout/attendances_list.xml" value="0.25" />
+        <entry key="..\:/Users/Lenovo/AndroidStudioProjects/ChatBotApp/app/src/main/res/layout/marks_list.xml" value="0.24895833333333334" />
+        <entry key="..\:/Users/Lenovo/AndroidStudioProjects/ChatBotApp/app/src/main/res/layout/marks_student.xml" value="0.24895833333333334" />
         <entry key="..\:/Users/Lenovo/AndroidStudioProjects/ChatBotApp/app/src/main/res/layout/users_list.xml" value="0.264" />
       </map>
     </option>

@@ -46,7 +46,7 @@ public class AttendanceResult extends AppCompatActivity {
             int count = 0;
             while(cursor.moveToNext())
             {
-                AttendanceModel obj = new AttendanceModel(cursor.getInt(0),cursor.getLong(1), cursor.getString(2), cursor.getString(3), cursor.getString(4), cursor.getString(5), cursor.getString(6), cursor.getString(7), cursor.getString(8), cursor.getString(9));
+                AttendanceModel obj = new AttendanceModel(cursor.getInt(0),cursor.getLong(1), cursor.getString(2), cursor.getString(3), cursor.getString(4), cursor.getString(5), cursor.getString(6), cursor.getString(7), cursor.getString(8), cursor.getString(9), cursor.getString(10));
                 data.add(obj);
             }
         }

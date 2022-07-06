@@ -44,8 +44,8 @@ public class AttendanceUpdate extends AppCompatActivity {
                 if (etStudentAttendanceRemarks.getText().toString().isEmpty()) {
                     Toast.makeText(AttendanceUpdate.this, "Remarks can not be empty", Toast.LENGTH_SHORT).show();
                 } else {
-                    Boolean checkUpdateJournal = chatAppDatabaseHelper.updateAttendance(Integer.parseInt(tvAttendanceID.getText().toString()), etStudentAttendanceRemarks.getText().toString());
-                    if (checkUpdateJournal==true){
+                    Boolean checkUpdateAttendance = chatAppDatabaseHelper.updateAttendance(Integer.parseInt(tvAttendanceID.getText().toString()), etStudentAttendanceRemarks.getText().toString());
+                    if (checkUpdateAttendance==true){
                         Toast.makeText(AttendanceUpdate.this, "Attendance Updated", Toast.LENGTH_SHORT).show();
                         finish();
                     } else {

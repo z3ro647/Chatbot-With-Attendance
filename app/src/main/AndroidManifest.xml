@@ -16,6 +16,24 @@
         android:theme="@style/Theme.ChatBotApp"
         tools:targetApi="31">
         <activity
+            android:name=".MarksStudent"
+            android:exported="false" />
+        <activity
+            android:name=".MarksCreate"
+            android:exported="false" />
+        <activity
+            android:name=".MarksScreen"
+            android:exported="false" />
+        <activity
+            android:name=".MarksUpdate"
+            android:exported="false" />
+        <activity
+            android:name=".MarksResult"
+            android:exported="false" />
+        <activity
+            android:name=".MarksSearch"
+            android:exported="false" />
+        <activity
             android:name=".AttendanceStudent"
             android:exported="false" />
         <activity

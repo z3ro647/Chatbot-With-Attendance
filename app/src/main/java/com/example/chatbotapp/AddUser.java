@@ -14,7 +14,7 @@ import com.example.chatbotapp.databasehelpers.ChatAppDatabaseHelper;
 public class AddUser extends AppCompatActivity {
 
     private Button btnNewSubmit;
-    private EditText etNewPhone, etNewEmail, etNewName, etNewPassowrd, etNewRole, etNewFaculty, etNewSem, etNewCustomID;
+    private EditText etNewPhone, etNewEmail, etNewName, etNewPassowrd, etNewRole, etNewFaculty, etNewSem, etNewCustomID, etBatch;
 
     ChatAppDatabaseHelper chatAppDatabaseHelper;
 
@@ -32,16 +32,17 @@ public class AddUser extends AppCompatActivity {
         etNewFaculty = findViewById(R.id.etNewFaculty);
         etNewSem = findViewById(R.id.etNewSem);
         etNewCustomID = findViewById(R.id.etNewCustomID);
+        etBatch = findViewById(R.id.etBatch);
 
         chatAppDatabaseHelper = new ChatAppDatabaseHelper(AddUser.this);
 
         btnNewSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(etNewPhone.getText().toString().isEmpty() || etNewEmail.getText().toString().isEmpty() || etNewName.getText().toString().isEmpty() ||  etNewPassowrd.getText().toString().isEmpty() || etNewRole.getText().toString().isEmpty() || etNewFaculty.getText().toString().isEmpty() || etNewSem.getText().toString().isEmpty() || etNewCustomID.getText().toString().isEmpty()) {
+                if(etNewPhone.getText().toString().isEmpty() || etNewEmail.getText().toString().isEmpty() || etNewName.getText().toString().isEmpty() ||  etNewPassowrd.getText().toString().isEmpty() || etNewRole.getText().toString().isEmpty() || etNewFaculty.getText().toString().isEmpty() || etNewSem.getText().toString().isEmpty() || etNewCustomID.getText().toString().isEmpty() || etBatch.getText().toString().isEmpty()) {
                     Toast.makeText(AddUser.this, "Field is empty", Toast.LENGTH_SHORT).show();
                 } else {
-                    Boolean insertUser = chatAppDatabaseHelper.insertUser(Long.parseLong(etNewPhone.getText().toString()), etNewEmail.getText().toString(), etNewName.getText().toString(), etNewPassowrd.getText().toString(), etNewRole.getText().toString(), etNewFaculty.getText().toString(), etNewSem.getText().toString(), etNewCustomID.getText().toString());
+                    Boolean insertUser = chatAppDatabaseHelper.insertUser(Long.parseLong(etNewPhone.getText().toString()), etNewEmail.getText().toString(), etNewName.getText().toString(), etNewPassowrd.getText().toString(), etNewRole.getText().toString(), etNewFaculty.getText().toString(), etNewSem.getText().toString(), etNewCustomID.getText().toString(), etBatch.getText().toString());
                     if(insertUser == true) {
                         Toast.makeText(AddUser.this, "New User Added", Toast.LENGTH_SHORT).show();
                         finish();

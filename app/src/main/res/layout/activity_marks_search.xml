@@ -5,29 +5,41 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".StudentDashboardScreen">
+    tools:context=".MarksSearch">
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/textView6"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Student Dashboard" />
+        android:text="Search Marks" />
+
+    <EditText
+        android:id="@+id/etSearchFaculty"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Faculty"
+        android:text="IT"
+        android:ems="10" />
+
+    <EditText
+        android:id="@+id/etSearchSem"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Sem"
+        android:text="7"
+        android:ems="10" />
+
+    <EditText
+        android:id="@+id/etBatchSearch"
+        android:hint="Batch"
+        android:text="1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
     <Button
-        android:id="@+id/btnStudentAttendance"
+        android:id="@+id/btnMarksSearch"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Attendance" />
+        android:text="Search Marks" />
 
-    <Button
-        android:id="@+id/btnStudentMarksResult"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Result" />
-
-    <Button
-        android:id="@+id/btnChatbotStudent"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Chatbot" />
 </LinearLayout>

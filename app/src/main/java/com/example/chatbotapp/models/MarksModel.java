@@ -1,31 +1,28 @@
 package com.example.chatbotapp.models;
 
-public class AttendanceModel {
-
-    int attendanceID;
+public class MarksModel {
+    int marksID;
     long phone;
-    String sessionID, customDate, faculty, sem, email, stuName, stuID, remark, batch;
+    String faculty, sem, email, stuName, stuID, marks, batch;
 
-    public AttendanceModel(int attendanceID, long phone, String sessionID, String customDate, String faculty, String sem, String email, String stuName, String stuID, String remark, String batch) {
-        this.attendanceID = attendanceID;
+    public MarksModel(int marksID, long phone, String faculty, String sem, String email, String stuName, String stuID, String marks, String batch) {
+        this.marksID = marksID;
         this.phone = phone;
-        this.sessionID = sessionID;
-        this.customDate = customDate;
         this.faculty = faculty;
         this.sem = sem;
         this.email = email;
         this.stuName = stuName;
         this.stuID = stuID;
-        this.remark = remark;
+        this.marks = marks;
         this.batch = batch;
     }
 
-    public int getAttendanceID() {
-        return attendanceID;
+    public int getMarksID() {
+        return marksID;
     }
 
-    public void setAttendanceID(int attendanceID) {
-        this.attendanceID = attendanceID;
+    public void setMarksID(int marksID) {
+        this.marksID = marksID;
     }
 
     public long getPhone() {
@@ -34,22 +31,6 @@ public class AttendanceModel {
 
     public void setPhone(long phone) {
         this.phone = phone;
-    }
-
-    public String getSessionID() {
-        return sessionID;
-    }
-
-    public void setSessionID(String sessionID) {
-        this.sessionID = sessionID;
-    }
-
-    public String getCustomDate() {
-        return customDate;
-    }
-
-    public void setCustomDate(String customDate) {
-        this.customDate = customDate;
     }
 
     public String getFaculty() {
@@ -92,14 +73,13 @@ public class AttendanceModel {
         this.stuID = stuID;
     }
 
-    public String getRemark() {
-        return remark;
+    public String getMarks() {
+        return marks;
     }
 
-    public void setRemark(String remark) {
-        this.remark = remark;
+    public void setMarks(String marks) {
+        this.marks = marks;
     }
-
 
     public String getBatch() {
         return batch;

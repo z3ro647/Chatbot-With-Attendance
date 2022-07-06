@@ -4,16 +4,16 @@
     android:layout_height="wrap_content">
 
     <TextView
-        android:id="@+id/tvDate"
+        android:id="@+id/tvStuSem"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:text="Date" />
+        android:text="Sem" />
 
     <TextView
-        android:id="@+id/tvStudentRemarks"
+        android:id="@+id/tvStuMarks"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:text="Remarks" />
+        android:text="Marks" />
 </LinearLayout>

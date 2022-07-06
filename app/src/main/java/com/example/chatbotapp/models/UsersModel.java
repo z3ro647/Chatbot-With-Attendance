@@ -4,9 +4,9 @@ public class UsersModel {
 
     int userID;
     long phone;
-    String email, password, name, role, faculty, sem, customID;
+    String email, password, name, role, faculty, sem, customID, batch;
 
-    public UsersModel(int userID, long phone, String email, String password, String name, String role, String faculty, String sem, String customID) {
+    public UsersModel(int userID, long phone, String email, String password, String name, String role, String faculty, String sem, String customID, String batch) {
         this.userID = userID;
         this.phone = phone;
         this.email = email;
@@ -16,6 +16,7 @@ public class UsersModel {
         this.faculty = faculty;
         this.sem = sem;
         this.customID = customID;
+        this.batch = batch;
     }
 
 
@@ -89,6 +90,15 @@ public class UsersModel {
 
     public void setCustomID(String customID) {
         this.customID = customID;
+    }
+
+
+    public String getBatch() {
+        return batch;
+    }
+
+    public void setBatch(String batch) {
+        this.batch = batch;
     }
 
 }

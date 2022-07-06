@@ -29,12 +29,4 @@
         android:layout_marginRight="100dp"
         android:text="Search Attendance" />
 
-    <Button
-        android:id="@+id/btnTakeAttendance"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="100dp"
-        android:layout_marginRight="100dp"
-        android:text="Take Attendance" />
-
 </LinearLayout>

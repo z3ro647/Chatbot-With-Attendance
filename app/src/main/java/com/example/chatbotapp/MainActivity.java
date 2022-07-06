@@ -91,6 +91,7 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
                             //startActivity(new Intent(MainActivity.this, StudentDashboardScreen.class));
                             Intent intent = new Intent(MainActivity.this, StudentDashboardScreen.class);
                             intent.putExtra("customID", cursor.getString(8));
+                            intent.putExtra("batch", cursor.getString(9));
                             startActivity(intent);
                         } else if (cursor.getString(5).equals("Parent")) {
                             //Toast.makeText(MainActivity.this, "Parent", Toast.LENGTH_SHORT).show();
@@ -118,11 +119,11 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
         btnDemoInsert.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                chatAppDatabaseHelper.insertUser(1234567890, "z3ro647@gmail.com", "Vivek", "123", "Student", "IT", "7", "1001");
-                chatAppDatabaseHelper.insertUser(1234567891, "prijal@gmail.com", "Prabesh", "123", "Teacher", "IT", "7", "2001");
-                chatAppDatabaseHelper.insertUser(1234567892, "admin@gmail.com", "Admin", "123", "Admin", "Admin", "Admin", "3001");
-                chatAppDatabaseHelper.insertUser(1234567893, "suman@gmail.com", "Suman", "123", "Parent", "IT", "7", "1001");
-                chatAppDatabaseHelper.insertUser(1234567894, "bishnu@gmail.com", "Bishnu", "123", "Student", "IT", "7", "1002");
+                chatAppDatabaseHelper.insertUser(1234567890, "z3ro647@gmail.com", "Vivek", "123", "Student", "IT", "7", "1001", "1");
+                chatAppDatabaseHelper.insertUser(1234567891, "prijal@gmail.com", "Prabesh", "123", "Teacher", "IT", "7", "2001", "");
+                chatAppDatabaseHelper.insertUser(1234567892, "admin@gmail.com", "Admin", "123", "Admin", "Admin", "Admin", "3001", "");
+                chatAppDatabaseHelper.insertUser(1234567893, "suman@gmail.com", "Suman", "123", "Parent", "IT", "7", "1001", "1");
+                chatAppDatabaseHelper.insertUser(1234567894, "bishnu@gmail.com", "Bishnu", "123", "Student", "IT", "7", "1002", "1");
             }
         });
 

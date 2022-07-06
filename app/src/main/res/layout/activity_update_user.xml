@@ -74,9 +74,17 @@
         android:ems="10"
         android:hint="CustomID" />
 
+    <EditText
+        android:id="@+id/etUpdateBatch"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="Batch" />
+
     <Button
         android:id="@+id/btnUpdate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Update" />
+        android:hint="Update" />
 </LinearLayout>

@@ -21,12 +21,6 @@
                 android:layout_height="wrap_content"
                 android:text="Admin Dashboard" />
 
-            <Button
-                android:id="@+id/btnViewAllUsers"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Users" />
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -53,11 +47,11 @@
                 android:orientation="horizontal">
 
                 <Button
-                    android:id="@+id/btnAssignment"
+                    android:id="@+id/btnViewAllUsers"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Assignments" />
+                    android:text="Users"
+                    android:layout_weight="1"/>
 
                 <Button
                     android:id="@+id/btnNotification"

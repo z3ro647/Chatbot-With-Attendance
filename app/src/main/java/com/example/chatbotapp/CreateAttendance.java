@@ -62,7 +62,7 @@ public class CreateAttendance extends AppCompatActivity {
                         int count = 0;
                         while(cursor.moveToNext())
                         {
-                            UsersModel obj = new UsersModel(cursor.getInt(0),cursor.getLong(1), cursor.getString(2), cursor.getString(3), cursor.getString(4), cursor.getString(5), cursor.getString(6), cursor.getString(7), cursor.getString(8));
+                            UsersModel obj = new UsersModel(cursor.getInt(0),cursor.getLong(1), cursor.getString(2), cursor.getString(3), cursor.getString(4), cursor.getString(5), cursor.getString(6), cursor.getString(7), cursor.getString(8), cursor.getString(9));
                             //data.add(obj);
                             obj.getRole();
                             if (obj.getRole().equals("Student")) {

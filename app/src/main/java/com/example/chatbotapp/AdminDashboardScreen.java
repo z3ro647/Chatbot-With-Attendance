@@ -15,6 +15,7 @@ public class AdminDashboardScreen extends AppCompatActivity {
 
     private Button btnViewAllUsers;
     private Button btnAttendance;
+    private Button btnMarks;
 
     ChatAppDatabaseHelper db;
 
@@ -27,6 +28,7 @@ public class AdminDashboardScreen extends AppCompatActivity {
 
         btnViewAllUsers = findViewById(R.id.btnViewAllUsers);
         btnAttendance = findViewById(R.id.btnAttendance);
+        btnMarks = findViewById(R.id.btnMarks);
 
         btnViewAllUsers.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -39,6 +41,13 @@ public class AdminDashboardScreen extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(AdminDashboardScreen.this, AttendanceScreen.class));
+            }
+        });
+
+        btnMarks.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(AdminDashboardScreen.this, MarksScreen.class));
             }
         });
     }

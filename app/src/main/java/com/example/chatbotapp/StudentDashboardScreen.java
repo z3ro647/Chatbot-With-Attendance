@@ -9,7 +9,7 @@ import android.widget.Button;
 
 public class StudentDashboardScreen extends AppCompatActivity {
 
-    private Button btnChatbotStudent, btnStudentAttendance;
+    private Button btnChatbotStudent, btnStudentAttendance, btnStudentMarksResult;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,8 +18,10 @@ public class StudentDashboardScreen extends AppCompatActivity {
 
         btnChatbotStudent = findViewById(R.id.btnChatbotStudent);
         btnStudentAttendance = findViewById(R.id.btnStudentAttendance);
+        btnStudentMarksResult = findViewById(R.id.btnStudentMarksResult);
 
         String customID = getIntent().getStringExtra("customID");
+        String batch = getIntent().getStringExtra("batch");
 
         btnChatbotStudent.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -32,6 +34,15 @@ public class StudentDashboardScreen extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(StudentDashboardScreen.this, AttendanceStudent.class);
+                intent.putExtra("customID", customID);
+                startActivity(intent);
+            }
+        });
+
+        btnStudentMarksResult.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(StudentDashboardScreen.this, MarksStudent.class);
                 intent.putExtra("customID", customID);
                 startActivity(intent);
             }

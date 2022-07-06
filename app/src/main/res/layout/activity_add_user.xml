@@ -69,6 +69,14 @@
         android:ems="10"
         android:hint="CustomID" />
 
+    <EditText
+        android:id="@+id/etBatch"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="Batch" />
+
     <Button
         android:id="@+id/btnNewSubmit"
         android:layout_width="match_parent"

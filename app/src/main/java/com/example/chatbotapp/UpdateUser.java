@@ -15,7 +15,7 @@ public class UpdateUser extends AppCompatActivity {
 
     ChatAppDatabaseHelper chatAppDatabaseHelper;
 
-    private EditText etUpdatePhone, etUpdateEmail, etUpdateName, etUpdatePassword, etUpdateRole, etUpdateFaculty, etUpdateSem, etUpdateCustomID;
+    private EditText etUpdatePhone, etUpdateEmail, etUpdateName, etUpdatePassword, etUpdateRole, etUpdateFaculty, etUpdateSem, etUpdateCustomID, etUpdateBatch;
 
     private Button btnUpdate;
 
@@ -34,6 +34,7 @@ public class UpdateUser extends AppCompatActivity {
         etUpdateFaculty = findViewById(R.id.etUpdateFaculty);
         etUpdateSem = findViewById(R.id.etUpdateSem);
         etUpdateCustomID = findViewById(R.id.etUpdateCustomID);
+        etUpdateBatch = findViewById(R.id.etUpdateBatch);
 
         btnUpdate = findViewById(R.id.btnUpdate);
 
@@ -46,10 +47,10 @@ public class UpdateUser extends AppCompatActivity {
         btnUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(etUpdatePhone.getText().toString().isEmpty() || etUpdateEmail.getText().toString().isEmpty() || etUpdateName.getText().toString().isEmpty() || etUpdatePassword.getText().toString().isEmpty() || etUpdateRole.getText().toString().isEmpty() || etUpdateFaculty.getText().toString().isEmpty() || etUpdateSem.getText().toString().isEmpty() || etUpdateCustomID.getText().toString().isEmpty()) {
+                if(etUpdatePhone.getText().toString().isEmpty() || etUpdateEmail.getText().toString().isEmpty() || etUpdateName.getText().toString().isEmpty() || etUpdatePassword.getText().toString().isEmpty() || etUpdateRole.getText().toString().isEmpty() || etUpdateFaculty.getText().toString().isEmpty() || etUpdateSem.getText().toString().isEmpty() || etUpdateCustomID.getText().toString().isEmpty() || etUpdateBatch.getText().toString().isEmpty()) {
                     Toast.makeText(UpdateUser.this, "Fields can not be empty.", Toast.LENGTH_SHORT).show();
                 } else {
-                    chatAppDatabaseHelper.updateUser(userID, Long.parseLong(etUpdatePhone.getText().toString()), etUpdateEmail.getText().toString(), etUpdateName.getText().toString(), etUpdatePassword.getText().toString(), etUpdateRole.getText().toString(), etUpdateFaculty.getText().toString(), etUpdateSem.getText().toString(), etUpdateCustomID.getText().toString());
+                    chatAppDatabaseHelper.updateUser(userID, Long.parseLong(etUpdatePhone.getText().toString()), etUpdateEmail.getText().toString(), etUpdateName.getText().toString(), etUpdatePassword.getText().toString(), etUpdateRole.getText().toString(), etUpdateFaculty.getText().toString(), etUpdateSem.getText().toString(), etUpdateCustomID.getText().toString(), etUpdateBatch.getText().toString());
                     Toast.makeText(UpdateUser.this, "User Updated", Toast.LENGTH_SHORT).show();
                     finish();
                 }
@@ -59,7 +60,7 @@ public class UpdateUser extends AppCompatActivity {
 
     private void searchOneUser(int id) {
         long phone;
-        String email = null, name = null, password = null, role = null, faculty = null, sem = null, customID = null;
+        String email = null, name = null, password = null, role = null, faculty = null, sem = null, customID = null, batch = null;
         Cursor cursor = chatAppDatabaseHelper.viewOneUsers(id);
         while (cursor.moveToNext()) {
 
@@ -71,6 +72,7 @@ public class UpdateUser extends AppCompatActivity {
             faculty = cursor.getString(6);
             sem = cursor.getString(7);
             customID = cursor.getString(8);
+            batch = cursor.getString(9);
 
             String sPhone = String.valueOf(phone);
 
@@ -82,6 +84,7 @@ public class UpdateUser extends AppCompatActivity {
             etUpdateFaculty.setText(faculty);
             etUpdateSem.setText(sem);
             etUpdateCustomID.setText(customID);
+            etUpdateBatch.setText(batch);
         }
     }
 }
