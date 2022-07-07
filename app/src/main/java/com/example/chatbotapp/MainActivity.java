@@ -241,5 +241,4 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
         dateView.setText(new StringBuilder().append(day).append("/")
                 .append(month).append("/").append(year));
     }
-
 }

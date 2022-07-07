@@ -16,6 +16,21 @@
         android:theme="@style/Theme.ChatBotApp"
         tools:targetApi="31">
         <activity
+            android:name=".NotificationResult"
+            android:exported="false" />
+        <activity
+            android:name=".NotificationSearch"
+            android:exported="false" />
+        <activity
+            android:name=".NotificationUpdate"
+            android:exported="false" />
+        <activity
+            android:name=".NotificationCreate"
+            android:exported="false" />
+        <activity
+            android:name=".NotificationScreen"
+            android:exported="false" />
+        <activity
             android:name=".MarksStudent"
             android:exported="false" />
         <activity

@@ -67,11 +67,15 @@ public class CreateAttendance extends AppCompatActivity {
                             //data.add(obj);
                             obj.getRole();
                             if (obj.getRole().equals("Student")) {
-                                chatAppDatabaseHelper.createAttendance("", dateView.getText().toString(),etFaculty.getText().toString(), etSem.getText().toString(), obj.getPhone(), obj.getEmail(), obj.getName(), obj.getCustomID(), "", etBatch.getText().toString());
+                                Boolean attendanceCreate = chatAppDatabaseHelper.createAttendance("", dateView.getText().toString(),etFaculty.getText().toString(), etSem.getText().toString(), obj.getPhone(), obj.getEmail(), obj.getName(), obj.getCustomID(), "", etBatch.getText().toString());
+                                if(attendanceCreate == true) {
+                                    Toast.makeText(CreateAttendance.this, "Attendence Created Successfully", Toast.LENGTH_SHORT).show();
+                                    finish();
+                                } else {
+                                    Toast.makeText(CreateAttendance.this, "Attendence creation failed", Toast.LENGTH_SHORT).show();
+                                }
                             }
                         }
-                        Toast.makeText(CreateAttendance.this, "Attendance Created", Toast.LENGTH_SHORT).show();
-                        finish();
                     }
                 }
             }

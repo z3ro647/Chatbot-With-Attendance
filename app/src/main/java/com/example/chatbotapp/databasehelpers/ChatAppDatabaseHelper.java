@@ -17,6 +17,7 @@ public class ChatAppDatabaseHelper extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL("CREATE TABLE user_table (userID INTEGER PRIMARY KEY AUTOINCREMENT, phone LONG, email TEXT, name TEXT, password TEXT, role TEXT, faculty TEXT, sem TEXT, customID TEXT, batch TEXT)");
         sqLiteDatabase.execSQL("CREATE TABLE attendance_table (attendanceID INTEGER PRIMARY KEY AUTOINCREMENT, sessionID TEXT, customDate DEFAULT (datetime('now', 'localtime')), faculty TEXT, sem TEXT, phone LONG, email TEXT, stuName TEXT, stuID TEXT, remark TEXT, batch TEXT)");
         sqLiteDatabase.execSQL("CREATE TABLE marks_table (marksID INTEGER PRIMARY KEY AUTOINCREMENT, faculty TEXT, sem TEXT, phone LONG, email TEXT, stuName TEXT, stuID TEXT, marks TEXT, batch TEXT)");
+        sqLiteDatabase.execSQL("CREATE TABLE notification_table (notificationID INTEGER PRIMARY KEY AUTOINCREMENT, customDate DEFAULT (datetime('now', 'localtime')), title TEXT, description TEXT)");
     }
 
     @Override
@@ -82,6 +83,21 @@ public class ChatAppDatabaseHelper extends SQLiteOpenHelper {
         contentValues.put("marks", marks);
         contentValues.put("batch", batch);
         long result = db.insert("marks_table", null, contentValues);
+        if(result == -1) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+
+    public Boolean createNotification(String customDate, String title, String description) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("customDate", customDate);
+        contentValues.put("title", title);
+        contentValues.put("description", description);
+        long result = db.insert("notification_table", null, contentValues);
         if(result == -1) {
             return false;
         } else {
@@ -212,5 +228,32 @@ public class ChatAppDatabaseHelper extends SQLiteOpenHelper {
         String query = "Select * from marks_table where stuID = ? ";
         Cursor cursor = db.rawQuery(query, new String[] {customID});
         return cursor;
+    }
+
+
+    public Cursor viewAllNotificationByDate(String customDate) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = "Select * from notification_table where customDate = ?";
+        Cursor cursor = db.rawQuery(query, new String[] {customDate});
+        return cursor;
+    }
+
+    public Boolean updateNotification(int id, String customDate, String title, String description) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("customDate", customDate);
+        contentValues.put("title", title);
+        contentValues.put("description", description);
+        Cursor cursor = db.rawQuery("Select * from notification_table where notificationID = ?", new String[] {String.valueOf(id)});
+        if(cursor.getCount()>0){
+            long result = db.update("notification_table", contentValues, "notificationID=?", new String[] {String.valueOf(id)});
+            if (result == -1) {
+                return false;
+            } else {
+                return true;
+            }
+        } else {
+            return false;
+        }
     }
 }

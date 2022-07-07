@@ -5,13 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".CreateAttendance">
+    tools:context=".NotificationCreate">
 
     <TextView
         android:id="@+id/textView4"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Create Attendance"
+        android:text="Create Notification"
         android:textAlignment="center"
         android:textSize="24dp"
         android:layout_marginTop="20dp"
@@ -28,7 +28,7 @@
         android:text="Set Date" />
 
     <TextView
-        android:id="@+id/tvShowDate"
+        android:id="@+id/tvShowNotificationDate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
@@ -36,40 +36,34 @@
         android:text="10/1/2022" />
 
     <EditText
-        android:id="@+id/etFaculty"
+        android:id="@+id/etNotificationTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:ems="10"
-        android:text="IT"
-        android:hint="Faculty" />
+        android:text="Local Holiday"
+        android:hint="Title" />
 
     <EditText
-        android:id="@+id/etSem"
+        android:id="@+id/etNotificationDescription"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:ems="10"
-        android:text="7"
-        android:hint="Sem" />
-
-    <EditText
-        android:id="@+id/etBatch"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:ems="10"
-        android:text="1"
-        android:hint="Batch" />
+        android:inputType="textMultiLine"
+        android:minLines="3"
+        android:maxLines="5"
+        android:text="A local holiday which is given by the local goverment"
+        android:hint="Description" />
 
     <Button
-        android:id="@+id/btnCreateNewAttendance"
+        android:id="@+id/btnCreateNewNotification"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="100dp"
         android:layout_marginRight="100dp"
         android:text="Create" />
+
 </LinearLayout>
