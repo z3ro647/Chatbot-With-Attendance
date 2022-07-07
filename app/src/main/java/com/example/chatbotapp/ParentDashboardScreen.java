@@ -16,13 +16,17 @@ public class ParentDashboardScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_parent_dashboard_screen);
 
-        btnChatbotParent = findViewById(R.id.btnChatbotParent);
+//        btnChatbotParent = findViewById(R.id.btnChatbotParent);
+//
+//        btnChatbotParent.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                startActivity(new Intent(ParentDashboardScreen.this, ChatbotScreen.class));
+//            }
+//        });
+    }
 
-        btnChatbotParent.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(ParentDashboardScreen.this, ChatbotScreen.class));
-            }
-        });
+    public void parentChatbot(View view) {
+        startActivity(new Intent(ParentDashboardScreen.this, ChatbotScreen.class));
     }
 }

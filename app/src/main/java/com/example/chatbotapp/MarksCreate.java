@@ -49,12 +49,12 @@ public class MarksCreate extends AppCompatActivity {
                         {
                             UsersModel obj = new UsersModel(cursor.getInt(0),cursor.getLong(1), cursor.getString(2), cursor.getString(3), cursor.getString(4), cursor.getString(5), cursor.getString(6), cursor.getString(7), cursor.getString(8), cursor.getString(9));
                             //data.add(obj);
-                            obj.getRole();
+                            //obj.getRole();
                             if (obj.getRole().equals("Student")) {
                                 chatAppDatabaseHelper.createMarks(etCreateMarksFaculty.getText().toString(), etCreateMarksSem.getText().toString(), obj.getPhone(), obj.getEmail(), obj.getName(), obj.getCustomID(), "", etCreateMarksBatch.getText().toString());
                             }
                         }
-                        Toast.makeText(MarksCreate.this, "Marks Created", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(MarksCreate.this, "Marks Created", Toast.LENGTH_SHORT).show();
                         finish();
                     }
                 }

@@ -20,9 +20,6 @@ import android.widget.Toast;
 import java.util.Calendar;
 
 import com.example.chatbotapp.databasehelpers.ChatAppDatabaseHelper;
-import com.example.chatbotapp.databasehelpers.DemoDatabaseHelper;
-import com.example.chatbotapp.databasemodels.DemoModel;
-import com.example.chatbotapp.models.UsersModel;
 
 
 public class MainActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener  {
@@ -41,8 +38,6 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
     private Button btnSignIn;
 
     private EditText etPhone, etPassword;
-
-    DemoDatabaseHelper db;
 
     ChatAppDatabaseHelper chatAppDatabaseHelper;
 
@@ -65,8 +60,6 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
         btnSignIn = findViewById(R.id.btnSignIn);
         etPhone = findViewById(R.id.etPhone);
         etPassword = findViewById(R.id.etPassword);
-
-        db = new DemoDatabaseHelper(this);
 
         chatAppDatabaseHelper = new ChatAppDatabaseHelper(this);
 
@@ -200,6 +193,7 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
         TimePickerDialog timePickerDialog = new TimePickerDialog(MainActivity.this, MainActivity.this, hour, minute, DateFormat.is24HourFormat(this));
         timePickerDialog.show();
     }
+
     @SuppressLint("SetTextI18n")
     @Override
     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {

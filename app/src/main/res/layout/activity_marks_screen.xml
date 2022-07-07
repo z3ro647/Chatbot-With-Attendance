@@ -7,15 +7,29 @@
     android:orientation="vertical"
     tools:context=".MarksScreen">
 
+    <TextView
+        android:id="@+id/textView12"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Marks Screen"
+        android:textAlignment="center"
+        android:textSize="24dp"
+        android:layout_marginTop="20dp"
+        android:textStyle="bold" />
+
     <Button
         android:id="@+id/btnCreateMarksScreen"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginRight="100dp"
+        android:layout_marginLeft="100dp"
         android:text="Create Marks" />
 
     <Button
         android:id="@+id/btnSearchMarks"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginRight="100dp"
+        android:layout_marginLeft="100dp"
         android:text="Search Marks" />
 </LinearLayout>

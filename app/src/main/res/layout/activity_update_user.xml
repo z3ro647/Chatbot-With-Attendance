@@ -7,84 +7,102 @@
     android:orientation="vertical"
     tools:context=".UpdateUser">
 
-    <TextView
-        android:id="@+id/tvTitleUpdate"
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="User Update" />
+        android:layout_height="match_parent" >
 
-    <TextView
-        android:id="@+id/tvUserID"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="UserID" />
-    <EditText
-        android:id="@+id/etUpdatePhone"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="Phone" />
+        <TextView
+            android:id="@+id/tvTitleUpdate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="User Update"
+            android:textAlignment="center"
+            android:textSize="24dp"
+            android:layout_marginTop="20dp"
+            android:textStyle="bold" />
 
-    <EditText
-        android:id="@+id/etUpdateEmail"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="Email" />
+        <!--    <TextView-->
+        <!--        android:id="@+id/tvUserID"-->
+        <!--        android:layout_width="match_parent"-->
+        <!--        android:layout_height="wrap_content"-->
+        <!--        android:text="UserID" />-->
 
-    <EditText
-        android:id="@+id/etUpdateName"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="Name" />
+        <EditText
+            android:id="@+id/etUpdatePhone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Phone" />
 
-    <EditText
-        android:id="@+id/etUpdatePassword"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="Password" />
+        <EditText
+            android:id="@+id/etUpdateEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Email" />
 
-    <EditText
-        android:id="@+id/etUpdateRole"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="Role" />
+        <EditText
+            android:id="@+id/etUpdateName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Name" />
 
-    <EditText
-        android:id="@+id/etUpdateFaculty"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="Faculty" />
+        <EditText
+            android:id="@+id/etUpdatePassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Password" />
 
-    <EditText
-        android:id="@+id/etUpdateSem"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="Sem" />
+        <EditText
+            android:id="@+id/etUpdateRole"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Role" />
 
-    <EditText
-        android:id="@+id/etUpdateCustomID"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="CustomID" />
+        <EditText
+            android:id="@+id/etUpdateFaculty"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Faculty" />
 
-    <EditText
-        android:id="@+id/etUpdateBatch"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:hint="Batch" />
+        <EditText
+            android:id="@+id/etUpdateSem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Sem" />
 
-    <Button
-        android:id="@+id/btnUpdate"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Update" />
+        <EditText
+            android:id="@+id/etUpdateCustomID"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="CustomID" />
+
+        <EditText
+            android:id="@+id/etUpdateBatch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:hint="Batch" />
+
+        <Button
+            android:id="@+id/btnUpdate"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Update" />
+
+    </LinearLayout>
+
 </LinearLayout>

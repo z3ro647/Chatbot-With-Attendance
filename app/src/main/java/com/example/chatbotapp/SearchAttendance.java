@@ -20,7 +20,7 @@ public class SearchAttendance extends AppCompatActivity {
 
     private TextView dateView;
     private Button btnSearchAttendanceWithDate;
-    private EditText etSearchFaculty, etSearchSem;
+    private EditText etSearchFaculty, etSearchSem, etSearchBatch;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +31,7 @@ public class SearchAttendance extends AppCompatActivity {
 
         etSearchFaculty = findViewById(R.id.etSearchFaculty);
         etSearchSem = findViewById(R.id.etSearchSem);
+        etSearchBatch = findViewById(R.id.etSearchBatch);
         btnSearchAttendanceWithDate = findViewById(R.id.btnSearchAttendanceWithDate);
 
         btnSearchAttendanceWithDate.setOnClickListener(new View.OnClickListener() {
@@ -38,13 +39,14 @@ public class SearchAttendance extends AppCompatActivity {
             public void onClick(View view) {
                 if(dateView.getText().toString().equals("Date")) {
                     Toast.makeText(SearchAttendance.this, "Please select Date.", Toast.LENGTH_SHORT).show();
-                } else if(etSearchFaculty.getText().toString().isEmpty() || etSearchSem.getText().toString().isEmpty()) {
+                } else if(etSearchFaculty.getText().toString().isEmpty() || etSearchSem.getText().toString().isEmpty() || etSearchBatch.getText().toString().isEmpty()) {
                     Toast.makeText(SearchAttendance.this, "Please Fill the Faculty and Sem", Toast.LENGTH_SHORT).show();
                 } else {
                     Intent intent = new Intent(SearchAttendance.this, AttendanceResult.class);
                     intent.putExtra("customDate", dateView.getText().toString());
                     intent.putExtra("faculty", etSearchFaculty.getText().toString());
                     intent.putExtra("sem", etSearchSem.getText().toString());
+                    intent.putExtra("batch", etSearchBatch.getText().toString());
                     startActivity(intent);
                 }
             }

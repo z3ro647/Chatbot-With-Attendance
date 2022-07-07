@@ -35,6 +35,11 @@ public class MarksUpdate extends AppCompatActivity {
         String faculty = getIntent().getStringExtra("faculty");
         String email = getIntent().getStringExtra("email");
         String marks = getIntent().getStringExtra("marks");
+        if(marks.isEmpty() || marks.equals("")) {
+            etStudentMarksmark.setText("0");
+        } else {
+            etStudentMarksmark.setText(marks);
+        }
 
         tvMarksID.setText(marksID);
         tvMarksEmail.setText(email);

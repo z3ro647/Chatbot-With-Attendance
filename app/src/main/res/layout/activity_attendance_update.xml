@@ -7,43 +7,91 @@
     android:orientation="vertical"
     tools:context=".AttendanceUpdate">
 
-    <TextView
-        android:id="@+id/tvAttendanceID"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Attendance ID" />
-
-    <TextView
-        android:id="@+id/tvAttendanceEmail"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Email" />
-
     <LinearLayout
+        android:orientation="vertical"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal">
+        android:layout_height="match_parent">
 
         <TextView
-            android:id="@+id/textView8"
-            android:layout_width="wrap_content"
+            android:id="@+id/textView15"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Remarks" />
+            android:text="Update Attendance"
+            android:textAlignment="center"
+            android:textSize="24sp"
+            android:textStyle="bold" />
 
-        <EditText
-            android:id="@+id/etStudentAttendanceRemarks"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textView13"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Attendance ID: " />
+
+            <TextView
+                android:id="@+id/tvAttendanceID"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Attendance ID"
+                android:textAlignment="viewStart"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textView14"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Student Email: " />
+
+            <TextView
+                android:id="@+id/tvAttendanceEmail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Email"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textView8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Remarks: " />
+
+            <EditText
+                android:id="@+id/etStudentAttendanceRemarks"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:text="Present" />
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btnSubmitAttendance"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:ems="10"
-            android:text="Present" />
-
+            android:text="Submit"
+            android:layout_marginLeft="80dp"
+            android:layout_marginRight="80dp" />
     </LinearLayout>
 
-    <Button
-        android:id="@+id/btnSubmitAttendance"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="Submit" />
 </LinearLayout>

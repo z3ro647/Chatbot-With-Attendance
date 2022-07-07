@@ -6,11 +6,22 @@
         <entry key="..\:/Users/Lenovo/AndroidStudioProjects/ChatBotApp/app/src/main/res/drawable/bg_chat_receive.xml" value="0.1" />
         <entry key="..\:/Users/Lenovo/AndroidStudioProjects/ChatBotApp/app/src/main/res/drawable/bg_chat_send.xml" value="0.1" />
         <entry key="..\:/Users/Lenovo/AndroidStudioProjects/ChatBotApp/app/src/main/res/drawable/border_outline.xml" value="0.1" />
+        <entry key="..\:/Users/Lenovo/AndroidStudioProjects/ChatBotApp/app/src/main/res/drawable/button_shadow.xml" value="0.2085" />
         <entry key="..\:/Users/Lenovo/AndroidStudioProjects/ChatBotApp/app/src/main/res/drawable/custom_input.xml" value="0.1985" />
         <entry key="..\:/Users/Lenovo/AndroidStudioProjects/ChatBotApp/app/src/main/res/drawable/custom_sign_in_button.xml" value="0.211" />
         <entry key="..\:/Users/Lenovo/AndroidStudioProjects/ChatBotApp/app/src/main/res/drawable/edittext_bg.xml" value="0.1985" />
+        <entry key="..\:/Users/Lenovo/AndroidStudioProjects/ChatBotApp/app/src/main/res/drawable/facebook_button.xml" value="0.2085" />
+        <entry key="..\:/Users/Lenovo/AndroidStudioProjects/ChatBotApp/app/src/main/res/drawable/google_button.xml" value="0.2085" />
+        <entry key="..\:/Users/Lenovo/AndroidStudioProjects/ChatBotApp/app/src/main/res/drawable/ic_baseline_calendar_today_24.xml" value="0.2085" />
+        <entry key="..\:/Users/Lenovo/AndroidStudioProjects/ChatBotApp/app/src/main/res/drawable/ic_baseline_face_24.xml" value="0.2085" />
+        <entry key="..\:/Users/Lenovo/AndroidStudioProjects/ChatBotApp/app/src/main/res/drawable/ic_baseline_import_contacts_24.xml" value="0.2085" />
+        <entry key="..\:/Users/Lenovo/AndroidStudioProjects/ChatBotApp/app/src/main/res/drawable/ic_baseline_person_outline_24.xml" value="0.2085" />
+        <entry key="..\:/Users/Lenovo/AndroidStudioProjects/ChatBotApp/app/src/main/res/drawable/ic_baseline_surround_sound_24.xml" value="0.2085" />
         <entry key="..\:/Users/Lenovo/AndroidStudioProjects/ChatBotApp/app/src/main/res/drawable/ic_email.xml" value="0.1985" />
         <entry key="..\:/Users/Lenovo/AndroidStudioProjects/ChatBotApp/app/src/main/res/drawable/ic_lock.xml" value="0.1985" />
+        <entry key="..\:/Users/Lenovo/AndroidStudioProjects/ChatBotApp/app/src/main/res/drawable/icon_button.xml" value="0.2085" />
+        <entry key="..\:/Users/Lenovo/AndroidStudioProjects/ChatBotApp/app/src/main/res/drawable/myrect.xml" value="0.2085" />
+        <entry key="..\:/Users/Lenovo/AndroidStudioProjects/ChatBotApp/app/src/main/res/drawable/signin_button.xml" value="0.2085" />
         <entry key="..\:/Users/Lenovo/AndroidStudioProjects/ChatBotApp/app/src/main/res/layout/activity_add_user.xml" value="0.2359375" />
         <entry key="..\:/Users/Lenovo/AndroidStudioProjects/ChatBotApp/app/src/main/res/layout/activity_admin_dashboard_screen.xml" value="0.25" />
         <entry key="..\:/Users/Lenovo/AndroidStudioProjects/ChatBotApp/app/src/main/res/layout/activity_attendance_result.xml" value="0.25" />

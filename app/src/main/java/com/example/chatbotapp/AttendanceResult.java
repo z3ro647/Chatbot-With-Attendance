@@ -29,13 +29,14 @@ public class AttendanceResult extends AppCompatActivity {
         String customDate = getIntent().getStringExtra("customDate");
         String faculty = getIntent().getStringExtra("faculty");
         String sem = getIntent().getStringExtra("sem");
+        String batch = getIntent().getStringExtra("batch");
 
         chatAppDatabaseHelper = new ChatAppDatabaseHelper(this);
 
         RecyclerView AttendanceList = (RecyclerView) findViewById(R.id.attendances);
         AttendanceList.setLayoutManager(new LinearLayoutManager(AttendanceResult.this));
 
-        Cursor cursor = new ChatAppDatabaseHelper(this).viewAllAttendanceBy(customDate, faculty, sem);
+        Cursor cursor = new ChatAppDatabaseHelper(this).viewAllAttendanceBy(customDate, faculty, sem, batch);
 
         data = new ArrayList<>();
 

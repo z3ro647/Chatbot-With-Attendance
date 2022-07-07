@@ -32,7 +32,7 @@ public class MarksStudentAdapter extends RecyclerView.Adapter<MarksStudentAdapte
 
     @Override
     public void onBindViewHolder(MarksStudentAdapter.MarksStudentViewHolder holder, int position) {
-        holder.dStuSem.setText(data.get(position).getSem());
+        holder.dStuSem.setText(data.get(position).getFaculty());
         holder.dStuMarks.setText(data.get(position).getMarks());
 
         holder.itemView.setOnClickListener(view -> {

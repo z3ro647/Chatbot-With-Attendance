@@ -100,7 +100,6 @@ public class AttendanceModel {
         this.remark = remark;
     }
 
-
     public String getBatch() {
         return batch;
     }

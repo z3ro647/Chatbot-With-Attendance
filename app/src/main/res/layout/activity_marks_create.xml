@@ -11,12 +11,18 @@
         android:id="@+id/textView6"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Create Marks" />
+        android:text="Create Marks"
+        android:textAlignment="center"
+        android:textSize="24dp"
+        android:layout_marginTop="20dp"
+        android:textStyle="bold" />
 
     <EditText
         android:id="@+id/etCreateMarksFaculty"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         android:hint="Faculty"
         android:text="IT"
         android:ems="10" />
@@ -25,12 +31,16 @@
         android:id="@+id/etCreateMarksSem"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         android:hint="Sem"
         android:text="7"
         android:ems="10" />
 
     <EditText
         android:id="@+id/etCreateMarksBatch"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         android:hint="Batch"
         android:text="1"
         android:layout_width="match_parent"
@@ -40,5 +50,7 @@
         android:id="@+id/btnCreateMarks"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="100dp"
+        android:layout_marginRight="100dp"
         android:text="Create Marks" />
 </LinearLayout>

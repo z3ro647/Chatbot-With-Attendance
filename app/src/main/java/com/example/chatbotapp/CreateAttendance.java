@@ -22,7 +22,7 @@ public class CreateAttendance extends AppCompatActivity {
 
     private TextView dateView;
 
-    private EditText etFaculty, etSem;
+    private EditText etFaculty, etSem, etBatch;
 
     int day, month, year, hour, minute;
     int myDay, myMonth, myYear, myHour, myMinute;
@@ -42,6 +42,7 @@ public class CreateAttendance extends AppCompatActivity {
 
         etFaculty = findViewById(R.id.etFaculty);
         etSem = findViewById(R.id.etSem);
+        etBatch = findViewById(R.id.etBatch);
 
         chatAppDatabaseHelper = new ChatAppDatabaseHelper(this);
 
@@ -49,11 +50,11 @@ public class CreateAttendance extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 dateView.getText().toString();
-                if(etFaculty.getText().toString().isEmpty() || etSem.getText().toString().isEmpty() || dateView.getText().toString().equals("Date")) {
+                if(etFaculty.getText().toString().isEmpty() || etSem.getText().toString().isEmpty() || etBatch.getText().toString().isEmpty() || dateView.getText().toString().equals("Date")) {
                     Toast.makeText(CreateAttendance.this, "Please fill the form correctly.", Toast.LENGTH_SHORT).show();
                 } else {
                     //chatAppDatabaseHelper.viewAllStudents(etFaculty.getText().toString(), etSem.getText().toString());
-                    Cursor cursor = new ChatAppDatabaseHelper(CreateAttendance.this).viewAllStudents(etFaculty.getText().toString(), etSem.getText().toString());
+                    Cursor cursor = new ChatAppDatabaseHelper(CreateAttendance.this).viewAllStudentsByBatch(etFaculty.getText().toString(), etSem.getText().toString(), etBatch.getText().toString());
 
                     if (cursor.getCount() == 0) {
                         Toast.makeText(CreateAttendance.this, "No Users to add.", Toast.LENGTH_SHORT).show();
@@ -66,7 +67,7 @@ public class CreateAttendance extends AppCompatActivity {
                             //data.add(obj);
                             obj.getRole();
                             if (obj.getRole().equals("Student")) {
-                                chatAppDatabaseHelper.createAttendance(dateView.getText().toString(),etFaculty.getText().toString(), etSem.getText().toString(), obj.getPhone(), obj.getEmail(), obj.getName(), obj.getCustomID(), "");
+                                chatAppDatabaseHelper.createAttendance("", dateView.getText().toString(),etFaculty.getText().toString(), etSem.getText().toString(), obj.getPhone(), obj.getEmail(), obj.getName(), obj.getCustomID(), "", etBatch.getText().toString());
                             }
                         }
                         Toast.makeText(CreateAttendance.this, "Attendance Created", Toast.LENGTH_SHORT).show();

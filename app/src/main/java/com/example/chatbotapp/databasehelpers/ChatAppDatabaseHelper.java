@@ -15,7 +15,7 @@ public class ChatAppDatabaseHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         sqLiteDatabase.execSQL("CREATE TABLE user_table (userID INTEGER PRIMARY KEY AUTOINCREMENT, phone LONG, email TEXT, name TEXT, password TEXT, role TEXT, faculty TEXT, sem TEXT, customID TEXT, batch TEXT)");
-        sqLiteDatabase.execSQL("CREATE TABLE attendance_table (attendanceID INTEGER PRIMARY KEY AUTOINCREMENT, sessionID TEXT, customDate DEFAULT (datetime('now', 'localtime')), faculty TEXT, sem TEXT, phone LONG, email TEXT, stuName TEXT, stuID TEXT, remark TEXT)");
+        sqLiteDatabase.execSQL("CREATE TABLE attendance_table (attendanceID INTEGER PRIMARY KEY AUTOINCREMENT, sessionID TEXT, customDate DEFAULT (datetime('now', 'localtime')), faculty TEXT, sem TEXT, phone LONG, email TEXT, stuName TEXT, stuID TEXT, remark TEXT, batch TEXT)");
         sqLiteDatabase.execSQL("CREATE TABLE marks_table (marksID INTEGER PRIMARY KEY AUTOINCREMENT, faculty TEXT, sem TEXT, phone LONG, email TEXT, stuName TEXT, stuID TEXT, marks TEXT, batch TEXT)");
     }
 
@@ -49,9 +49,10 @@ public class ChatAppDatabaseHelper extends SQLiteOpenHelper {
         }
     }
 
-    public Boolean createAttendance(String customDate,String faculty, String sem,long phone,String email, String stuName, String stuID, String remark) {
+    public Boolean createAttendance(String sessionID, String customDate,String faculty, String sem,long phone,String email, String stuName, String stuID, String remark, String batch) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
+        contentValues.put("sessionID", sessionID);
         contentValues.put("customDate", customDate);
         contentValues.put("faculty", faculty);
         contentValues.put("sem", sem);
@@ -60,6 +61,7 @@ public class ChatAppDatabaseHelper extends SQLiteOpenHelper {
         contentValues.put("stuName", stuName);
         contentValues.put("stuID", stuID);
         contentValues.put("remark", remark);
+        contentValues.put("batch", batch);
         long result = db.insert("attendance_table", null, contentValues);
         if(result == -1) {
             return false;
@@ -75,7 +77,7 @@ public class ChatAppDatabaseHelper extends SQLiteOpenHelper {
         contentValues.put("sem", sem);
         contentValues.put("phone", phone);
         contentValues.put("email", email);
-        contentValues.put("name", stuName);
+        contentValues.put("stuName", stuName);
         contentValues.put("stuID", stuID);
         contentValues.put("marks", marks);
         contentValues.put("batch", batch);
@@ -148,10 +150,10 @@ public class ChatAppDatabaseHelper extends SQLiteOpenHelper {
         }
     }
 
-    public Cursor viewAllAttendanceBy(String customDate, String faculty, String sem) {
+    public Cursor viewAllAttendanceBy(String customDate, String faculty, String sem, String batch) {
         SQLiteDatabase db = this.getReadableDatabase();
-        String query = "Select * from attendance_table where customDate = ? AND faculty = ? AND sem = ?";
-        Cursor cursor = db.rawQuery(query, new String[] {customDate, faculty, sem});
+        String query = "Select * from attendance_table where customDate = ? AND faculty = ? AND sem = ? AND batch = ?";
+        Cursor cursor = db.rawQuery(query, new String[] {customDate, faculty, sem, batch});
         return cursor;
     }
 
@@ -192,9 +194,9 @@ public class ChatAppDatabaseHelper extends SQLiteOpenHelper {
         ContentValues contentValues = new ContentValues();
         //contentValues.put("id", id);
         contentValues.put("marks", marks);
-        Cursor cursor = db.rawQuery("Select * from attendance_table where attendanceID = ?", new String[] {String.valueOf(id)});
+        Cursor cursor = db.rawQuery("Select * from marks_table where marksID = ?", new String[] {String.valueOf(id)});
         if(cursor.getCount()>0){
-            long result = db.update("marks_table", contentValues, "attendanceID=?", new String[] {String.valueOf(id)});
+            long result = db.update("marks_table", contentValues, "marksID=?", new String[] {String.valueOf(id)});
             if (result == -1) {
                 return false;
             } else {

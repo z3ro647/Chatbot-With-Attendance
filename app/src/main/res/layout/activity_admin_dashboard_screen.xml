@@ -9,7 +9,6 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -17,55 +16,220 @@
 
             <TextView
                 android:id="@+id/tvDashboard"
-                android:layout_width="match_parent"
+                android:textSize="24dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Admin Dashboard" />
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:text="Admin Dashboard"
+                android:textAlignment="viewStart"
+                android:textStyle="bold" />
+
+<!--            <LinearLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:orientation="horizontal">-->
+
+<!--                <Button-->
+<!--                    android:id="@+id/btnAttendance"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:text="Attendance" />-->
+
+<!--                <Button-->
+<!--                    android:id="@+id/btnMarks"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:text="Marks" />-->
+<!--            </LinearLayout>-->
+
+<!--            <LinearLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:orientation="horizontal">-->
+
+<!--                <Button-->
+<!--                    android:id="@+id/btnViewAllUsers"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="Users"-->
+<!--                    android:layout_weight="1"/>-->
+
+<!--                <Button-->
+<!--                    android:id="@+id/btnNotification"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:text="Notification" />-->
+<!--            </LinearLayout>-->
+
 
             <LinearLayout
+                android:padding="20dp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal">
 
-                <Button
-                    android:id="@+id/btnAttendance"
+                <LinearLayout
+                    android:layout_weight="1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Attendance" />
+                    android:background="#68BBE3"
+                    android:layout_marginRight="5dp"
+                    android:onClick="takeAttendance"
+                    android:orientation="vertical">
 
-                <Button
-                    android:id="@+id/btnMarks"
+                    <ImageView
+                        android:layout_gravity="center"
+                        android:layout_marginTop="20dp"
+                        android:src="@drawable/ic_baseline_calendar_today_24"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <TextView
+                        android:id="@+id/textView9"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Take Attendance"
+                        android:layout_marginBottom="20dp"
+                        android:textAlignment="center" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="#0E86D4"
+                        android:text="Details"
+                        android:textAlignment="center" />
+
+                </LinearLayout>
+
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Marks" />
+                    android:onClick="takeMarks"
+                    android:background="#18A558"
+                    android:layout_marginLeft="5dp"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_marginTop="20dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_baseline_trending_up_24"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <TextView
+                        android:id="@+id/textView10"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Marks Entry"
+                        android:layout_marginBottom="20dp"
+                        android:textAlignment="center" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="#116530"
+                        android:text="Details"
+                        android:textAlignment="center" />
+                </LinearLayout>
+
             </LinearLayout>
 
             <LinearLayout
+                android:padding="20dp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal">
 
-                <Button
-                    android:id="@+id/btnViewAllUsers"
+                <LinearLayout
+                    android:layout_weight="1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Users"
-                    android:layout_weight="1"/>
+                    android:background="#FF2511"
+                    android:layout_marginRight="5dp"
+                    android:onClick="takeUsers"
+                    android:orientation="vertical">
 
-                <Button
-                    android:id="@+id/btnNotification"
+                    <ImageView
+                        android:layout_gravity="center"
+                        android:layout_marginTop="20dp"
+                        android:src="@drawable/ic_baseline_person_outline_24"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Users"
+                        android:layout_marginBottom="20dp"
+                        android:textAlignment="center" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="#BA0F30"
+                        android:text="Details"
+                        android:textAlignment="center" />
+
+                </LinearLayout>
+
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Notification" />
+                    android:background="#FDB750"
+                    android:layout_marginLeft="5dp"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_marginTop="20dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_baseline_mail_outline_24"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Notifications"
+                        android:layout_marginBottom="20dp"
+                        android:textAlignment="center" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="#FD7F20"
+                        android:text="Details"
+                        android:textAlignment="center" />
+                </LinearLayout>
+
             </LinearLayout>
 
-            <TextView
-                android:id="@+id/tvNotification"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Upcoming Events" />
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_baseline_surround_sound_24"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:id="@+id/tvNotification"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:text="Upcoming Events"
+                    android:textStyle="bold" />
+            </LinearLayout>
 
         </LinearLayout>
     </ScrollView>

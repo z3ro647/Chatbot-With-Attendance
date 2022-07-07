@@ -11,26 +11,35 @@
         android:id="@+id/textView4"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Create Attendance" />
+        android:text="Create Attendance"
+        android:textAlignment="center"
+        android:textSize="24dp"
+        android:textStyle="bold" />
 
     <Button
         android:id="@+id/btnSetDate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:onClick="setDate"
-        android:text="Set Date
-" />
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="100dp"
+        android:layout_marginRight="100dp"
+        android:text="Set Date" />
 
     <TextView
         android:id="@+id/tvShowDate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         android:text="10/1/2022" />
 
     <EditText
         android:id="@+id/etFaculty"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         android:ems="10"
         android:text="IT"
         android:hint="Faculty" />
@@ -39,13 +48,27 @@
         android:id="@+id/etSem"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         android:ems="10"
         android:text="7"
         android:hint="Sem" />
+
+    <EditText
+        android:id="@+id/etBatch"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:ems="10"
+        android:text="1"
+        android:hint="Batch" />
 
     <Button
         android:id="@+id/btnCreateNewAttendance"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="100dp"
+        android:layout_marginRight="100dp"
         android:text="Create" />
 </LinearLayout>
