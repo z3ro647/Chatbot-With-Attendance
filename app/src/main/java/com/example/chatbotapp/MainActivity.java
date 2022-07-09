@@ -39,6 +39,8 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
 
     private EditText etPhone, etPassword;
 
+    private TextView signUp;
+
     ChatAppDatabaseHelper chatAppDatabaseHelper;
 
     int day, month, year, hour, minute;
@@ -60,6 +62,7 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
         btnSignIn = findViewById(R.id.btnSignIn);
         etPhone = findViewById(R.id.etPhone);
         etPassword = findViewById(R.id.etPassword);
+        signUp = findViewById(R.id.signUp);
 
         chatAppDatabaseHelper = new ChatAppDatabaseHelper(this);
 
@@ -106,6 +109,13 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
             public void onClick(View view) {
                 Intent i = new Intent(MainActivity.this, ChatbotScreen.class);
                 startActivity(i);
+            }
+        });
+
+        signUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this, SignUpScreen.class));
             }
         });
 
