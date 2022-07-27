@@ -10,11 +10,15 @@ import android.widget.Button;
 public class ParentDashboardScreen extends AppCompatActivity {
 
     private Button btnChatbotParent;
+    private String customID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_parent_dashboard_screen);
+
+        customID = getIntent().getStringExtra("customID");
+        String batch = getIntent().getStringExtra("batch");
 
 //        btnChatbotParent = findViewById(R.id.btnChatbotParent);
 //
@@ -24,6 +28,18 @@ public class ParentDashboardScreen extends AppCompatActivity {
 //                startActivity(new Intent(ParentDashboardScreen.this, ChatbotScreen.class));
 //            }
 //        });
+    }
+
+    public void parentStudentAttendance(View view) {
+        Intent intent = new Intent(ParentDashboardScreen.this, AttendanceStudent.class);
+        intent.putExtra("customID", customID);
+        startActivity(intent);
+    }
+
+    public void parentStudentMarks(View view) {
+        Intent intent = new Intent(ParentDashboardScreen.this, MarksStudent.class);
+        intent.putExtra("customID", customID);
+        startActivity(intent);
     }
 
     public void parentChatbot(View view) {

@@ -8,6 +8,7 @@ import android.app.Dialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.format.DateFormat;
 import android.view.View;
@@ -51,6 +52,7 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
     private Button btnCreate;
 
     private Button btnDemoInsert;
+    private TextView textView38;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +65,8 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
         etPhone = findViewById(R.id.etPhone);
         etPassword = findViewById(R.id.etPassword);
         signUp = findViewById(R.id.signUp);
+
+        textView38 = findViewById(R.id.textView38);
 
         chatAppDatabaseHelper = new ChatAppDatabaseHelper(this);
 
@@ -91,7 +95,11 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
                             startActivity(intent);
                         } else if (cursor.getString(5).equals("Parent")) {
                             //Toast.makeText(MainActivity.this, "Parent", Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(MainActivity.this, ParentDashboardScreen.class));
+                            //startActivity(new Intent(MainActivity.this, ParentDashboardScreen.class));
+                            Intent intent = new Intent(MainActivity.this, ParentDashboardScreen.class);
+                            intent.putExtra("customID", cursor.getString(8));
+                            intent.putExtra("batch", cursor.getString(9));
+                            startActivity(intent);
                         } else if (cursor.getString(5).equals("Teacher")) {
                             //Toast.makeText(MainActivity.this, "Teacher", Toast.LENGTH_SHORT).show();
                             startActivity(new Intent(MainActivity.this, AdminDashboardScreen.class));
@@ -101,6 +109,15 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
                         }
                     }
                 }
+            }
+        });
+
+        textView38.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Uri uri = Uri.parse("https://www.tutorialspoint.com/android/android_tutorial.pdf"); // missing 'http://' will cause crashed
+                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                startActivity(intent);
             }
         });
 
@@ -190,6 +207,7 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
 //            }
 //        });
     }
+
 
 
     @Override

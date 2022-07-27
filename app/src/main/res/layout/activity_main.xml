@@ -11,6 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -240,6 +241,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Demo Data Insert" />
+
+        <TextView
+            android:id="@+id/textView38"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:layout_marginTop="20dp"
+            android:onClick=""
+            android:text="download pdf" />
 
         <!--    <Button-->
         <!--        android:id="@+id/btnAdmin"-->
