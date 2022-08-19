@@ -1,5 +1,6 @@
 package com.example.chatbotapp;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
@@ -11,6 +12,7 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.format.DateFormat;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -18,9 +20,24 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
+
+import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 import com.example.chatbotapp.databasehelpers.ChatAppDatabaseHelper;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.Timestamp;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 
 public class MainActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener  {
@@ -54,12 +71,144 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
     private Button btnDemoInsert;
     private TextView textView38;
 
+    private Button btnFirebase;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         btnChatBot = findViewById(R.id.btnChatBot);
         btnDemoInsert = findViewById(R.id.btnDemoInsert);
+
+        FirebaseApp.initializeApp(MainActivity.this);
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        Map<String, Object> data = new HashMap<>();
+        data.put("Name", "Tokyo");
+        data.put("Capital", "Japan");
+
+        db.collection("ThisCities").add(data).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentReference> task) {
+                if (task.isSuccessful()) {
+                    Toast.makeText(MainActivity.this, "Values added Successfully", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+//        db.collection("This").document("LA")
+//                .set(data)
+//                .addOnSuccessListener(new OnSuccessListener<Void>() {
+//                    @Override
+//                    public void onSuccess(Void aVoid) {
+//                        Log.d("data", "DocumentSnapshot successfully written!");
+//                    }
+//                })
+//                .addOnFailureListener(new OnFailureListener() {
+//                    @Override
+//                    public void onFailure(@NonNull Exception e) {
+//                        Log.w("data", "Error writing document", e);
+//                    }
+//                });
+
+        Map<String, Object> docData = new HashMap<>();
+        docData.put("stringExample", "Hello world!");
+        docData.put("booleanExample", true);
+        docData.put("numberExample", 3.14159265);
+        docData.put("dateExample", new Timestamp(new Date()));
+        docData.put("listExample", Arrays.asList(1, 2, 3));
+        docData.put("nullExample", null);
+
+        Map<String, Object> nestedData = new HashMap<>();
+        nestedData.put("a", 5);
+        nestedData.put("b", true);
+
+        docData.put("objectExample", nestedData);
+
+//        db.collection("data").document("one")
+//                .set(docData)
+//                .addOnSuccessListener(new OnSuccessListener<Void>() {
+//                    @Override
+//                    public void onSuccess(Void aVoid) {
+//                        Log.d("TAG", "DocumentSnapshot successfully written!");
+//                    }
+//                })
+//                .addOnFailureListener(new OnFailureListener() {
+//                    @Override
+//                    public void onFailure(@NonNull Exception e) {
+//                        Log.w("TAG", "Error writing document", e);
+//                    }
+//                });
+
+
+//        // Add a new document with a generated id.
+//        Map<String, Object> data1 = new HashMap<>();
+//        data.put("name", "Tokyo");
+//        data.put("country", "Japan");
+//
+//        db.collection("okeys")
+//                .add(data1)
+//                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+//                    @Override
+//                    public void onSuccess(DocumentReference documentReference) {
+//                        Log.d("TAG", "DocumentSnapshot written with ID: " + documentReference.getId());
+//                    }
+//                })
+//                .addOnFailureListener(new OnFailureListener() {
+//                    @Override
+//                    public void onFailure(@NonNull Exception e) {
+//                        Log.w("TAG", "Error adding document", e);
+//                    }
+//                });
+//
+
+
+//
+//        DocumentReference docRef = db.collection("cities").document("SF");
+//        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+//            @Override
+//            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+//                if (task.isSuccessful()) {
+//                    DocumentSnapshot document = task.getResult();
+//                    if (document.exists()) {
+//                        Log.d("TAG", "DocumentSnapshot data: " + document.getData());
+//                    } else {
+//                        Log.d("TAG", "No such document");
+//                    }
+//                } else {
+//                    Log.d("TAG", "get failed with ", task.getException());
+//                }
+//            }
+//        });
+
+
+
+
+
+        btnFirebase = findViewById(R.id.btnFirebase);
+//        btnFirebase.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Map<String, Object> city = new HashMap<>();
+//                city.put("name", "Los Angeles");
+//                city.put("state", "CA");
+//                city.put("country", "USA");
+//
+//                db.collection("cities").document("LA")
+//                        .set(city)
+//                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+//                            @Override
+//                            public void onSuccess(Void aVoid) {
+//                                Log.d("TAG", "DocumentSnapshot successfully written!");
+//                            }
+//                        })
+//                        .addOnFailureListener(new OnFailureListener() {
+//                            @Override
+//                            public void onFailure(@NonNull Exception e) {
+//                                Log.w("TAG", "Error writing document", e);
+//                            }
+//                        });
+//            }
+//        });
 
         btnSignIn = findViewById(R.id.btnSignIn);
         etPhone = findViewById(R.id.etPhone);

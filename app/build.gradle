@@ -7,6 +7,8 @@ android {
     packagingOptions {
         resources {
             excludes += ['META-INF/INDEX.LIST', 'META-INF/DEPENDENCIES']
+//            excludes += ['META-INF/INDEX.LIST', 'META-INF/DEPENDENCIES', 'google/protobuf/*.proto']
+//            excludes += ['META-INF/INDEX.LIST', 'META-INF/DEPENDENCIES', 'google/protobuf']
         }
     }
 
@@ -18,6 +20,8 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        multiDexEnabled true
     }
 
     buildTypes {
@@ -36,22 +40,61 @@ dependencies {
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    implementation 'androidx.appcompat:appcompat:1.3.0'
-    implementation 'com.google.android.material:material:1.4.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
+    implementation 'com.android.support:multidex:1.0.3'
+
+//    implementation platform('com.google.firebase:firebase-bom:29.0.0')
+    implementation platform('com.google.firebase:firebase-bom:30.3.1')
+
+    implementation platform('com.google.cloud:libraries-bom:24.3.0')
+//    implementation('com.google.cloud:google-cloud-dialogflow') {
+//        exclude group: 'com.google.api.grpc'
+//    }
+
+    implementation('com.google.firebase:firebase-firestore:24.2.2') {
+        exclude module: 'protolite-well-known-types'
+        exclude module: 'protobuf-javalite'
+        exclude module: 'protobuf-java'
+        exclude module: 'protobuf-java-util'
+        exclude module: 'com.google.protobuf'
+    }
+
+//    implementation('com.google.firebase:firebase-firestore') {
+//        exclude module: 'protolite-well-known-types'
+//        exclude module: 'protobuf-javalite'
+//        exclude module: 'protobuf-java'
+//        exclude module: 'protobuf-java-util'
+//        exclude module: 'com.google.protobuf'
+//    }
+
+    implementation 'com.google.auth:google-auth-library-oauth2-http:0.20.0'
+
+    implementation 'com.google.protobuf:protobuf-java:3.12.2'
+
+    implementation 'androidx.appcompat:appcompat:1.5.0'
+    implementation 'com.google.android.material:material:1.6.1'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
     implementation 'androidx.recyclerview:recyclerview:1.2.1'
 
-//    implementation 'androidx.appcompat:appcompat:1.2.0'
-//    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
-//    testImplementation 'junit:junit:4.12'
-//    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
-//    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
-//    implementation 'androidx.recyclerview:recyclerview:1.1.0'
-
     //dialogFlow
     implementation 'com.google.cloud:google-cloud-dialogflow:2.1.0'
-    implementation 'io.grpc:grpc-okhttp:1.30.0'
+    implementation 'io.grpc:grpc-okhttp:1.44.1'
+    implementation 'io.grpc:grpc-stub:1.44.1'
+    compileOnly 'org.apache.tomcat:annotations-api:6.0.53'
+    //implementation 'io.grpc:grpc-protobuf-lite:1.36.0'
+    //implementation 'com.google.protobuf:protobuf-lite:3.0.1'
+
+    // Import the BoM for the Firebase platform
+//    implementation platform('com.google.firebase:firebase-bom:30.3.1')
+
+    // Declare the dependency for the Cloud Firestore library
+    // When using the BoM, you don't specify versions in Firebase library dependencies
+//    implementation 'com.google.firebase:firebase-firestore'
+
+    implementation 'com.google.firebase:firebase-core:21.1.0'
 }
+
+// ADD THIS AT THE BOTTOM
+apply plugin: 'com.google.gms.google-services'

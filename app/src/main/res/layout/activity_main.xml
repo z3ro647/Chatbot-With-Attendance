@@ -251,6 +251,12 @@
             android:onClick=""
             android:text="download pdf" />
 
+        <Button
+            android:id="@+id/btnFirebase"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Firebase Btn" />
+
         <!--    <Button-->
         <!--        android:id="@+id/btnAdmin"-->
         <!--        android:layout_width="match_parent"-->
