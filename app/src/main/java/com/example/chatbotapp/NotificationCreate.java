@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -13,6 +14,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.chatbotapp.databasehelpers.ChatAppDatabaseHelper;
+import com.parse.ParseObject;
+import com.parse.ParseQuery;
 
 public class NotificationCreate extends AppCompatActivity {
 
@@ -25,6 +28,7 @@ public class NotificationCreate extends AppCompatActivity {
     private EditText etNotificationTitle, etNotificationDescription;
 
     ChatAppDatabaseHelper chatAppDatabaseHelper;
+    private ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +36,7 @@ public class NotificationCreate extends AppCompatActivity {
         setContentView(R.layout.activity_notification_create);
 
         chatAppDatabaseHelper = new ChatAppDatabaseHelper(this);
+        progressDialog = new ProgressDialog(NotificationCreate.this);
 
         dateView = (TextView) findViewById(R.id.tvShowNotificationDate);
 
@@ -48,13 +53,20 @@ public class NotificationCreate extends AppCompatActivity {
                 } else if (dateView.getText().toString().equals("Date")) {
                     Toast.makeText(NotificationCreate.this, "Please Select Date", Toast.LENGTH_SHORT).show();
                 } else {
-                    Boolean notificationCreate = chatAppDatabaseHelper.createNotification(dateView.getText().toString(), etNotificationTitle.getText().toString(), etNotificationDescription.getText().toString());
-                    if(notificationCreate == true) {
-                        Toast.makeText(NotificationCreate.this, "Notification Created Successfuly", Toast.LENGTH_SHORT).show();
-                        finish();
-                    } else {
-                        Toast.makeText(NotificationCreate.this, "Notification Creation failed", Toast.LENGTH_SHORT).show();
-                    }
+//                    Boolean notificationCreate = chatAppDatabaseHelper.createNotification(dateView.getText().toString(), etNotificationTitle.getText().toString(), etNotificationDescription.getText().toString());
+//                    if(notificationCreate == true) {
+//                        Toast.makeText(NotificationCreate.this, "Notification Created Successfuly", Toast.LENGTH_SHORT).show();
+//                        finish();
+//                    } else {
+//                        Toast.makeText(NotificationCreate.this, "Notification Creation failed", Toast.LENGTH_SHORT).show();
+//                    }
+
+                    ParseObject notificationTable = new ParseObject("NotificationTable");
+                    notificationTable.put("notificationTitle", etNotificationTitle.getText().toString());
+                    notificationTable.put("notificationDescription", etNotificationDescription.getText().toString());
+                    notificationTable.put("customDate", dateView.getText().toString());
+                    notificationTable.saveInBackground();
+                    finish();
                 }
             }
         });

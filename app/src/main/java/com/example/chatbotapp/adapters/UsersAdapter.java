@@ -57,7 +57,7 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UsersViewHol
         Button btnEdit, btnDelete;
         public UsersViewHolder(View itemView) {
             super(itemView);
-            dId = (TextView)itemView.findViewById(R.id.txtUserID);
+            //dId = (TextView)itemView.findViewById(R.id.txtUserID);
             dCustomID = (TextView)itemView.findViewById(R.id.txtCustomID);
             dEmail = (TextView)itemView.findViewById(R.id.txtEmail);
         }

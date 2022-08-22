@@ -1,6 +1,5 @@
 package com.example.chatbotapp;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
@@ -21,23 +20,19 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
+import java.util.Objects;
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.AtomicReference;
 
+import com.example.chatbotapp.back4app.OnLineDatabaseHelper;
 import com.example.chatbotapp.databasehelpers.ChatAppDatabaseHelper;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.FirebaseApp;
-import com.google.firebase.Timestamp;
-import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.FirebaseFirestore;
+import com.example.chatbotapp.models.UsersModel;
+import com.parse.ParseObject;
+import com.parse.ParseQuery;
 
 
 public class MainActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener  {
@@ -72,28 +67,54 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
     private TextView textView38;
 
     private Button btnFirebase;
+    private TextView tvForgotPassword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        btnChatBot = findViewById(R.id.btnChatBot);
-        btnDemoInsert = findViewById(R.id.btnDemoInsert);
+        //btnChatBot = findViewById(R.id.btnChatBot);
+        //btnDemoInsert = findViewById(R.id.btnDemoInsert);
 
-        FirebaseApp.initializeApp(MainActivity.this);
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-        Map<String, Object> data = new HashMap<>();
-        data.put("Name", "Tokyo");
-        data.put("Capital", "Japan");
+//        ParseQuery<ParseObject> query = ParseQuery.getQuery("FirstClass");
+//        query.orderByDescending("createdAt");
+//        query.findInBackground((objects, e) -> {
+//            if (e == null) {
+//                Log.d("Length of objects: ","Length is "+objects.size());
+//                //We are initializing Todo object list to our adapter
+//                initTodoList(objects);
+//                ParseObject object = objects.get(0);
+//                Log.d("This is msg: ", ""+object.getString("message"));
+//            } else {
+//                Log.d("Error value of E","This is the error: "+e.getMessage().toString());
+//            }
+//        });
 
-        db.collection("ThisCities").add(data).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
-            @Override
-            public void onComplete(@NonNull Task<DocumentReference> task) {
-                if (task.isSuccessful()) {
-                    Toast.makeText(MainActivity.this, "Values added Successfully", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
+//        ParseObject firstObject = new  ParseObject("FirstClass");
+//        firstObject.put("message","Hey ! First message from android. Parse is now connected");
+//        firstObject.saveInBackground(e -> {
+//            if (e != null){
+//                Log.e("MainActivity", e.getLocalizedMessage());
+//            }else{
+//                Log.d("MainActivity","Object saved.");
+//            }
+//            });
+
+
+//        FirebaseApp.initializeApp(MainActivity.this);
+//        FirebaseFirestore db = FirebaseFirestore.getInstance();
+//        Map<String, Object> data = new HashMap<>();
+//        data.put("Name", "Tokyo");
+//        data.put("Capital", "Japan");
+//
+//        db.collection("ThisCities").add(data).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
+//            @Override
+//            public void onComplete(@NonNull Task<DocumentReference> task) {
+//                if (task.isSuccessful()) {
+//                    Toast.makeText(MainActivity.this, "Values added Successfully", Toast.LENGTH_SHORT).show();
+//                }
+//            }
+//        });
 
 //        db.collection("This").document("LA")
 //                .set(data)
@@ -110,19 +131,19 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
 //                    }
 //                });
 
-        Map<String, Object> docData = new HashMap<>();
-        docData.put("stringExample", "Hello world!");
-        docData.put("booleanExample", true);
-        docData.put("numberExample", 3.14159265);
-        docData.put("dateExample", new Timestamp(new Date()));
-        docData.put("listExample", Arrays.asList(1, 2, 3));
-        docData.put("nullExample", null);
-
-        Map<String, Object> nestedData = new HashMap<>();
-        nestedData.put("a", 5);
-        nestedData.put("b", true);
-
-        docData.put("objectExample", nestedData);
+//        Map<String, Object> docData = new HashMap<>();
+//        docData.put("stringExample", "Hello world!");
+//        docData.put("booleanExample", true);
+//        docData.put("numberExample", 3.14159265);
+//        docData.put("dateExample", new Timestamp(new Date()));
+//        docData.put("listExample", Arrays.asList(1, 2, 3));
+//        docData.put("nullExample", null);
+//
+//        Map<String, Object> nestedData = new HashMap<>();
+//        nestedData.put("a", 5);
+//        nestedData.put("b", true);
+//
+//        docData.put("objectExample", nestedData);
 
 //        db.collection("data").document("one")
 //                .set(docData)
@@ -159,10 +180,7 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
 //                        Log.w("TAG", "Error adding document", e);
 //                    }
 //                });
-//
 
-
-//
 //        DocumentReference docRef = db.collection("cities").document("SF");
 //        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
 //            @Override
@@ -180,11 +198,7 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
 //            }
 //        });
 
-
-
-
-
-        btnFirebase = findViewById(R.id.btnFirebase);
+        //btnFirebase = findViewById(R.id.btnFirebase);
 //        btnFirebase.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View view) {
@@ -210,18 +224,59 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
 //            }
 //        });
 
+//        btnFirebase.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                AtomicReference<Boolean> userFound = new AtomicReference<>(false);
+//                AtomicInteger position = new AtomicInteger();
+//                ParseQuery<ParseObject> query = ParseQuery.getQuery("AppUser");
+//                query.findInBackground((objects, e) -> {
+//                    Log.d("Length","Length is: "+objects.size());
+//                    if (e == null) {
+//                        for (int i = 0; i < objects.size(); i++) {
+//                            ParseObject object = objects.get(i);
+//                            Log.d("Email", "Email at " + i + " is: " + object.getString("email"));
+//                            if(Objects.equals(object.getString("email"), "z3ro647@gmail.com")) {
+//                                Toast.makeText(MainActivity.this, "Email Found", Toast.LENGTH_SHORT).show();
+//                                userFound.set(true);
+//                                break;
+//                            }
+//                        }
+//                        if(!userFound.get()) {
+//                            Toast.makeText(MainActivity.this, "Email not Found", Toast.LENGTH_SHORT).show();
+//                        }
+//                    } else {
+//                        Log.d("Error value of E","This is the error: "+e.getMessage().toString());
+//                    }
+//                });
+//            }
+//        });
+
         btnSignIn = findViewById(R.id.btnSignIn);
         etPhone = findViewById(R.id.etPhone);
         etPassword = findViewById(R.id.etPassword);
-        signUp = findViewById(R.id.signUp);
+        //signUp = findViewById(R.id.signUp);
 
-        textView38 = findViewById(R.id.textView38);
+        //textView38 = findViewById(R.id.textView38);
+
+        tvForgotPassword = findViewById(R.id.tvForgotPassword);
 
         chatAppDatabaseHelper = new ChatAppDatabaseHelper(this);
+
+        tvForgotPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, ForgotActivity.class);
+                startActivity(intent);
+            }
+        });
 
         btnSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                AtomicBoolean userFound = new AtomicBoolean(false);
+                AtomicInteger position = new AtomicInteger();
+                String name = "";
                 if(etPhone.getText().toString().isEmpty() || etPassword.getText().toString().isEmpty()) {
                     Toast.makeText(MainActivity.this, "Phone or Password can not be empty.", Toast.LENGTH_SHORT).show();
                 } else if(etPhone.getText().toString().equals("123") && etPassword.getText().toString().equals("admin")) {
@@ -230,71 +285,115 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
                     finishAffinity();
                     startActivity(i);
                 } else {
-                    Cursor cursor = chatAppDatabaseHelper.searchOneUserPhoneAndPassword(etPhone.getText().toString(), etPassword.getText().toString());
-                    if (cursor.getCount() == 0) {
-                        Toast.makeText(MainActivity.this, "Phone and Password does not match.", Toast.LENGTH_SHORT).show();
-                    } else {
-                        cursor.moveToFirst();
-                        if(cursor.getString(5).equals("Student")) {
-                            //Toast.makeText(MainActivity.this, "Student", Toast.LENGTH_SHORT).show();
-                            //startActivity(new Intent(MainActivity.this, StudentDashboardScreen.class));
-                            Intent intent = new Intent(MainActivity.this, StudentDashboardScreen.class);
-                            intent.putExtra("customID", cursor.getString(8));
-                            intent.putExtra("batch", cursor.getString(9));
-                            startActivity(intent);
-                        } else if (cursor.getString(5).equals("Parent")) {
-                            //Toast.makeText(MainActivity.this, "Parent", Toast.LENGTH_SHORT).show();
-                            //startActivity(new Intent(MainActivity.this, ParentDashboardScreen.class));
-                            Intent intent = new Intent(MainActivity.this, ParentDashboardScreen.class);
-                            intent.putExtra("customID", cursor.getString(8));
-                            intent.putExtra("batch", cursor.getString(9));
-                            startActivity(intent);
-                        } else if (cursor.getString(5).equals("Teacher")) {
-                            //Toast.makeText(MainActivity.this, "Teacher", Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(MainActivity.this, AdminDashboardScreen.class));
+                    ParseQuery<ParseObject> query = ParseQuery.getQuery("AppUser");
+                    query.findInBackground((objects, e) -> {
+                        Log.d("Length","Length is: "+objects.size());
+                        if (e == null) {
+                            for (int i = 0; i < objects.size(); i++) {
+                                ParseObject object = objects.get(i);
+                                Log.d("Phone and Password", "Phone: " + object.getString("phone") + ", Password: " + object.getString("password") + ", at: " + i);
+                                if(Objects.equals(object.getString("phone"), etPhone.getText().toString()) && Objects.equals(object.getString("password"), etPassword.getText().toString())) {
+                                    //Toast.makeText(MainActivity.this, "User Phone Found", Toast.LENGTH_SHORT).show();
+                                    userFound.set(true);
+                                    if(Objects.equals(object.getString("role"), "Student")) {
+                                        Intent intent = new Intent(MainActivity.this, StudentDashboardScreen.class);
+                                        intent.putExtra("customID", object.getString("customID"));
+                                        intent.putExtra("batch", object.getString("batch"));
+                                        startActivity(intent);
+                                    }
+                                    else if (Objects.equals(object.getString("role"), "Parent")) {
+                                        Intent intent = new Intent(MainActivity.this, ParentDashboardScreen.class);
+                                        intent.putExtra("customID", object.getString("customID"));
+                                        intent.putExtra("batch", object.getString("batch"));
+                                        startActivity(intent);
+                                    }
+                                    else if (Objects.equals(object.getString("role"), "Teacher")) {
+                                        startActivity(new Intent(MainActivity.this, AdminDashboardScreen.class));
+                                    }
+                                    else {
+                                        startActivity(new Intent(MainActivity.this, AdminDashboardScreen.class));
+                                    }
+                                    break;
+                                }
+                            }
+                            if(!userFound.get()) {
+                                Toast.makeText(MainActivity.this, "User Phone not Found", Toast.LENGTH_SHORT).show();
+                            }
                         } else {
-                            //Toast.makeText(MainActivity.this, "Admin", Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(MainActivity.this, AdminDashboardScreen.class));
+                            Log.d("Error value of E","This is the error: "+e.getMessage().toString());
                         }
-                    }
+                    });
+//                    Cursor cursor = chatAppDatabaseHelper.searchOneUserPhoneAndPassword(etPhone.getText().toString(), etPassword.getText().toString());
+//                    if (cursor.getCount() == 0) {
+//                        Toast.makeText(MainActivity.this, "Phone and Password does not match.", Toast.LENGTH_SHORT).show();
+//                    } else {
+//                        cursor.moveToFirst();
+//                        if(cursor.getString(5).equals("Student")) {
+//                            //Toast.makeText(MainActivity.this, "Student", Toast.LENGTH_SHORT).show();
+//                            //startActivity(new Intent(MainActivity.this, StudentDashboardScreen.class));
+//                            Intent intent = new Intent(MainActivity.this, StudentDashboardScreen.class);
+//                            intent.putExtra("customID", cursor.getString(8));
+//                            intent.putExtra("batch", cursor.getString(9));
+//                            startActivity(intent);
+//                        } else if (cursor.getString(5).equals("Parent")) {
+//                            //Toast.makeText(MainActivity.this, "Parent", Toast.LENGTH_SHORT).show();
+//                            //startActivity(new Intent(MainActivity.this, ParentDashboardScreen.class));
+//                            Intent intent = new Intent(MainActivity.this, ParentDashboardScreen.class);
+//                            intent.putExtra("customID", cursor.getString(8));
+//                            intent.putExtra("batch", cursor.getString(9));
+//                            startActivity(intent);
+//                        } else if (cursor.getString(5).equals("Teacher")) {
+//                            //Toast.makeText(MainActivity.this, "Teacher", Toast.LENGTH_SHORT).show();
+//                            startActivity(new Intent(MainActivity.this, AdminDashboardScreen.class));
+//                        } else {
+//                            //Toast.makeText(MainActivity.this, "Admin", Toast.LENGTH_SHORT).show();
+//                            startActivity(new Intent(MainActivity.this, AdminDashboardScreen.class));
+//                        }
+//                    }
                 }
             }
         });
 
-        textView38.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Uri uri = Uri.parse("https://www.tutorialspoint.com/android/android_tutorial.pdf"); // missing 'http://' will cause crashed
-                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-                startActivity(intent);
-            }
-        });
+//        textView38.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Uri uri = Uri.parse("https://www.tutorialspoint.com/android/android_tutorial.pdf"); // missing 'http://' will cause crashed
+//                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+//                startActivity(intent);
+//            }
+//        });
 
-        btnChatBot.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(MainActivity.this, ChatbotScreen.class);
-                startActivity(i);
-            }
-        });
+//        btnChatBot.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent i = new Intent(MainActivity.this, ChatbotScreen.class);
+//                startActivity(i);
+//            }
+//        });
 
-        signUp.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this, SignUpScreen.class));
-            }
-        });
+//        signUp.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                startActivity(new Intent(MainActivity.this, SignUpScreen.class));
+//            }
+//        });
 
-        btnDemoInsert.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                chatAppDatabaseHelper.insertUser(1234567890, "z3ro647@gmail.com", "Vivek", "123", "Student", "IT", "7", "1001", "1");
-                chatAppDatabaseHelper.insertUser(1234567891, "prijal@gmail.com", "Prabesh", "123", "Teacher", "IT", "7", "2001", "");
-                chatAppDatabaseHelper.insertUser(1234567892, "admin@gmail.com", "Admin", "123", "Admin", "Admin", "Admin", "3001", "");
-                chatAppDatabaseHelper.insertUser(1234567893, "suman@gmail.com", "Suman", "123", "Parent", "IT", "7", "1001", "1");
-                chatAppDatabaseHelper.insertUser(1234567894, "bishnu@gmail.com", "Bishnu", "123", "Student", "IT", "7", "1002", "1");
-            }
-        });
+//        btnDemoInsert.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                OnLineDatabaseHelper onlinedatabasehelper = new OnLineDatabaseHelper();
+//                onlinedatabasehelper.insertDemoUser("1234567890", "z3ro647@gmail.com", "Vivek", "123", "Student", "IT", "7", "1001", "1");
+//                onlinedatabasehelper.insertDemoUser("1234567891", "prijal@gmail.com", "Prabesh", "123", "Teacher", "IT", "7", "2001", "");
+//                onlinedatabasehelper.insertDemoUser("1234567892", "admin@gmail.com", "Admin", "123", "Admin", "Admin", "Admin", "3001", "");
+//                onlinedatabasehelper.insertDemoUser("1234567893", "suman@gmail.com", "Suman", "123", "Parent", "IT", "7", "1001", "1");
+//                onlinedatabasehelper.insertDemoUser("1234567894", "bishnu@gmail.com", "Bishnu", "123", "Student", "Hotel", "7", "1002", "1");
+////                chatAppDatabaseHelper.insertUser(1234567890, "z3ro647@gmail.com", "Vivek", "123", "Student", "IT", "7", "1001", "1");
+////                chatAppDatabaseHelper.insertUser(1234567891, "prijal@gmail.com", "Prabesh", "123", "Teacher", "IT", "7", "2001", "");
+////                chatAppDatabaseHelper.insertUser(1234567892, "admin@gmail.com", "Admin", "123", "Admin", "Admin", "Admin", "3001", "");
+////                chatAppDatabaseHelper.insertUser(1234567893, "suman@gmail.com", "Suman", "123", "Parent", "IT", "7", "1001", "1");
+////                chatAppDatabaseHelper.insertUser(1234567894, "bishnu@gmail.com", "Bishnu", "123", "Student", "IT", "7", "1002", "1");
+//            }
+//        });
 
 //        btnBtn = findViewById(R.id.button);
 //        btnPickDateTime = findViewById(R.id.btnPick);

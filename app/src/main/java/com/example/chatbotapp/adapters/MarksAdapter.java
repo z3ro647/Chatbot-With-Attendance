@@ -32,7 +32,7 @@ public class MarksAdapter extends RecyclerView.Adapter<MarksAdapter.MarksViewHol
 
     @Override
     public void onBindViewHolder(MarksAdapter.MarksViewHolder holder, int position) {
-        holder.dFaculty.setText(data.get(position).getFaculty());
+        holder.dSem.setText(data.get(position).getSem());
         holder.dStudentEmail.setText(data.get(position).getEmail());
         holder.dStudentMarks.setText(data.get(position).getMarks());
 
@@ -51,10 +51,10 @@ public class MarksAdapter extends RecyclerView.Adapter<MarksAdapter.MarksViewHol
     }
 
     public class MarksViewHolder extends RecyclerView.ViewHolder {
-        TextView dFaculty, dStudentEmail, dStudentMarks;
+        TextView dSem, dStudentEmail, dStudentMarks;
         public MarksViewHolder(View itemView) {
             super(itemView);
-            dFaculty = (TextView)itemView.findViewById(R.id.tvFacultyMarks);
+            dSem = (TextView)itemView.findViewById(R.id.tvSemMarks);
             dStudentEmail = (TextView)itemView.findViewById(R.id.tvStuEmailMarks);
             dStudentMarks = (TextView)itemView.findViewById(R.id.tvMarks);
         }
