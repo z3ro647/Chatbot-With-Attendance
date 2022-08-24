@@ -246,7 +246,7 @@ public class UsersScreen extends AppCompatActivity {
         etPopUpCustomID = popupInputDialogView.findViewById(R.id.etPopUpNewCustomID);
         etPopUpBatch = popupInputDialogView.findViewById(R.id.etPopUpNewBatch);
         saveUserButton = popupInputDialogView.findViewById(R.id.btnPopUpNewSubmit);
-        cancelUserButton = popupInputDialogView.findViewById(R.id.btnPopUpNewCancle);
+        cancelUserButton = popupInputDialogView.findViewById(R.id.btnPopUpNewCancel);
     }
 
     private void initPopupViewControls(String phone, String email, String name, String password, String role, String faculty, String sem, String customID, String batch) {
@@ -262,7 +262,7 @@ public class UsersScreen extends AppCompatActivity {
         etPopUpCustomID = popupInputDialogView.findViewById(R.id.etPopUpNewCustomID);
         etPopUpBatch = popupInputDialogView.findViewById(R.id.etPopUpNewBatch);
         saveUserButton = popupInputDialogView.findViewById(R.id.btnPopUpNewSubmit);
-        cancelUserButton = popupInputDialogView.findViewById(R.id.btnPopUpNewCancle);
+        cancelUserButton = popupInputDialogView.findViewById(R.id.btnPopUpNewCancel);
 
         etPopUpPhone.setText(phone);
         etPopUpEmail.setText(email);

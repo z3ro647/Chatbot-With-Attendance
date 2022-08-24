@@ -63,6 +63,9 @@ public class StudentDashboardScreen extends AppCompatActivity {
     }
 
     public void studentChatbot(View view) {
-        startActivity(new Intent(StudentDashboardScreen.this, ChatbotScreen.class));
+        //startActivity(new Intent(StudentDashboardScreen.this, ChatbotScreen.class));
+        Intent intent = new Intent(StudentDashboardScreen.this, ChatbotScreen.class);
+        intent.putExtra("customID", customID);
+        startActivity(intent);
     }
 }

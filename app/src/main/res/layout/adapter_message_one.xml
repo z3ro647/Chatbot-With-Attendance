@@ -37,8 +37,14 @@
 
     <Button
         android:id="@+id/btnDownloadPDF"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Download PDF" />
+
+    <Button
+        android:id="@+id/btnGoto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Goto" />
 
 </LinearLayout>

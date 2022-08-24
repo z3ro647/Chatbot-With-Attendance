@@ -45,16 +45,20 @@ public class ChatbotScreen extends AppCompatActivity implements BotReply {
     private SessionName sessionName;
     private String uuid = UUID.randomUUID().toString();
     private String TAG = "mainactivity";
+
+    private String customID;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chatbot_screen);
 
+        customID = getIntent().getStringExtra("customID");
+
         chatView = findViewById(R.id.chatView);
         editMessage = findViewById(R.id.editMessage);
         btnSend = findViewById(R.id.btnSend);
 
-        chatAdapter = new ChatAdapter(messageList, this);
+        chatAdapter = new ChatAdapter(messageList, ChatbotScreen.this, customID);
         chatView.setAdapter(chatAdapter);
 
         btnSend.setOnClickListener(new View.OnClickListener() {

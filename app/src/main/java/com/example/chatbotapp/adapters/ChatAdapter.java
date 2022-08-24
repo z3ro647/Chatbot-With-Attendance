@@ -14,6 +14,9 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.chatbotapp.AttendanceStudent;
+import com.example.chatbotapp.MarksScreen;
+import com.example.chatbotapp.MarksStudent;
 import com.example.chatbotapp.R;
 import com.example.chatbotapp.models.Message;
 
@@ -24,9 +27,12 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.MyViewHolder> 
     private List<Message> messageList;
     private Activity activity;
 
-    public ChatAdapter(List<Message> messageList, Activity activity) {
+    private String customID;
+
+    public ChatAdapter(List<Message> messageList, Activity activity, String customID) {
         this.messageList = messageList;
         this.activity = activity;
+        this.customID = customID;
     }
 
     @NonNull @Override
@@ -55,8 +61,13 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.MyViewHolder> 
             holder.messageSend.setVisibility(View.GONE);
             holder.messageReceive.setText(message);
             holder.btnDownloadPDF.setVisibility(View.GONE);
+            holder.btnGoto.setVisibility(View.GONE);
+
+            //Toast.makeText(activity, "Custom ID: " +customID, Toast.LENGTH_SHORT).show();
             boolean downloadAndroidPDF = message.startsWith("Download Android");
             boolean downloadFlutterPDF = message.startsWith("Download Flutter");
+            boolean forMarks = message.startsWith("Click the button below to open view marks");
+            boolean forAttendance = message.startsWith("Click the button below to view attendance");
             if(downloadAndroidPDF) {
                 Log.d("androidPDF" ,"Download Android PDF");
                 holder.btnDownloadPDF.setText("Download Android PDF");
@@ -68,11 +79,23 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.MyViewHolder> 
             } else {
                 holder.btnDownloadPDF.setVisibility(View.GONE);
             }
+            if(forMarks) {
+                Log.d("goTo","Marks Screen");
+                holder.btnGoto.setText("View Marks");
+                holder.btnGoto.setVisibility(View.VISIBLE);
+            } else if (forAttendance) {
+                Log.d("goTo", "Attendance Screen");
+                holder.btnGoto.setText("View Attendance");
+                holder.btnGoto.setVisibility(View.VISIBLE);
+            } else {
+                holder.btnGoto.setVisibility(View.GONE);
+            }
         } else {
             holder.messageSend.setVisibility(View.VISIBLE);
             holder.messageReceive.setVisibility(View.GONE);
             holder.messageSend.setText(message);
             holder.btnDownloadPDF.setVisibility(View.GONE);
+            holder.btnGoto.setVisibility(View.GONE);
 //            boolean downloadAndroidPDF = message.startsWith("Download Android");
 //            if(downloadAndroidPDF) {
 //                Log.d("androidPDF" ,"Download Android PDF");
@@ -111,6 +134,29 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.MyViewHolder> 
                 }
             }
         });
+        holder.btnGoto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(activity, "Intent Button", Toast.LENGTH_SHORT).show();
+                boolean forMarks = message.startsWith("Click the button below to open view marks");
+                boolean forAttendance = message.startsWith("Click the button below to view attendance");
+                if(forMarks) {
+                    Log.d("goingTo", "Opening Marks");
+                    Toast.makeText(activity, "Marks", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(activity, MarksStudent.class);
+                    intent.putExtra("customID", customID);
+                    activity.startActivity(intent);
+                } else if (forAttendance) {
+                    Log.d("goingTo", "Opening Attendance");
+                    Toast.makeText(activity, "Attendance", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(activity, AttendanceStudent.class);
+                    intent.putExtra("customID", customID);
+                    activity.startActivity(intent);
+                } else {
+                    holder.btnGoto.setVisibility(View.GONE);
+                }
+            }
+        });
     }
 
     @Override public int getItemCount() {
@@ -122,12 +168,14 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.MyViewHolder> 
         TextView messageSend;
         TextView messageReceive;
         Button btnDownloadPDF;
+        Button btnGoto;
 
         MyViewHolder(@NonNull View itemView) {
             super(itemView);
             messageSend = itemView.findViewById(R.id.message_send);
             messageReceive = itemView.findViewById(R.id.message_receive);
             btnDownloadPDF = itemView.findViewById(R.id.btnDownloadPDF);
+            btnGoto = itemView.findViewById(R.id.btnGoto);
         }
     }
 }
