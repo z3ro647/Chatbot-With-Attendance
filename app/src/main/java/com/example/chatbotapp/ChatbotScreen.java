@@ -3,7 +3,10 @@ package com.example.chatbotapp;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -11,6 +14,10 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import com.alan.alansdk.AlanCallback;
+import com.alan.alansdk.AlanConfig;
+import com.alan.alansdk.button.AlanButton;
+import com.alan.alansdk.events.EventCommand;
 import com.example.chatbotapp.adapters.ChatAdapter;
 import com.example.chatbotapp.helpers.SendMessageInBg;
 import com.example.chatbotapp.interfaces.BotReply;
@@ -26,6 +33,9 @@ import com.google.cloud.dialogflow.v2.SessionsSettings;
 import com.google.cloud.dialogflow.v2.TextInput;
 import com.google.common.collect.Lists;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
@@ -39,6 +49,9 @@ public class ChatbotScreen extends AppCompatActivity implements BotReply {
     List<Message> messageList = new ArrayList<>();
     EditText editMessage;
     ImageButton btnSend;
+
+    /// Add AlanButton variable
+    private AlanButton alanButton;
 
     //dialogFlow
     private SessionsClient sessionsClient;
@@ -60,6 +73,76 @@ public class ChatbotScreen extends AppCompatActivity implements BotReply {
 
         chatAdapter = new ChatAdapter(messageList, ChatbotScreen.this, customID);
         chatView.setAdapter(chatAdapter);
+
+        /// Define the project key
+        AlanConfig config = AlanConfig.builder().setProjectId("c93de0d311280b0dd2e916242791d8a02e956eca572e1d8b807a3e2338fdd0dc/stage").build();
+        alanButton = findViewById(R.id.alan_button);
+        alanButton.initWithConfig(config);
+
+        AlanCallback alanCallback = new AlanCallback() {
+            /// Handle commands from Alan Studio
+            @Override
+            public void onCommand(final EventCommand eventCommand) {
+                String commandName = "";
+                try {
+                    JSONObject command = eventCommand.getData();
+                    commandName = command.getJSONObject("data").getString("command");
+                    Log.d("AlanButton", "onCommand: commandName: " + commandName);
+//                    if(commandName == "attendance") {
+//                        //Toast.makeText(ChatbotScreen.this, "Attendance", Toast.LENGTH_SHORT).show();
+////                        Intent i = new Intent(ChatbotScreen.this, StudentDashboardScreen.class);
+////                        startActivity(i);
+//                        openScreen();
+//                    }
+                } catch (JSONException e) {
+                    Log.e("AlanButton", e.getMessage());
+                }
+                if(commandName.equals("attendance")) {
+                    Handler handler = new Handler();
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            Intent i = new Intent(ChatbotScreen.this, AttendanceStudent.class);
+                            i.putExtra("customID", customID);
+                            startActivity(i);
+                        }
+                    }, 3000);
+                } else if (commandName.equals("marks")) {
+                    Handler handler = new Handler();
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            Intent i = new Intent(ChatbotScreen.this, MarksStudent.class);
+                            i.putExtra("customID", customID);
+                            startActivity(i);
+                        }
+                    }, 3000);
+                } else if (commandName.equals("android")) {
+                    Handler handler = new Handler();
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            Uri uri = Uri.parse("https://www.tutorialspoint.com/android/android_tutorial.pdf"); // missing 'http://' will cause crashed
+                            Intent i = new Intent(Intent.ACTION_VIEW, uri);
+                            startActivity(i);
+                        }
+                    }, 3000);
+                } else if (commandName.equals("flutter")) {
+                    Handler handler = new Handler();
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            Uri uri = Uri.parse("https://www.tutorialspoint.com/flutter/flutter_tutorial.pdf"); // missing 'http://' will cause crashed
+                            Intent i = new Intent(Intent.ACTION_VIEW, uri);
+                            startActivity(i);
+                        }
+                    }, 3000);
+                }
+            }
+        };
+
+        /// Register callbacks
+        alanButton.registerCallback(alanCallback);
 
         btnSend.setOnClickListener(new View.OnClickListener() {
             @Override public void onClick(View view) {

@@ -98,7 +98,7 @@
             android:paddingLeft="20dp"
             android:paddingRight="20dp"
             android:hint="Enter your phone number"
-            android:text="123"
+            android:text="1234567890"
             android:inputType="number" />
 
         <TextView
@@ -119,7 +119,7 @@
             android:background="@drawable/custom_input"
             android:paddingLeft="20dp"
             android:paddingRight="20dp"
-            android:text="admin"
+            android:text="123"
             android:hint="Enter password 8-12 charactors" />
 
         <TextView
