@@ -20,6 +20,8 @@ import com.example.chatbotapp.MarksStudent;
 import com.example.chatbotapp.R;
 import com.example.chatbotapp.models.Message;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
 
 public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.MyViewHolder> {
@@ -62,12 +64,14 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.MyViewHolder> 
             holder.messageReceive.setText(message);
             holder.btnDownloadPDF.setVisibility(View.GONE);
             holder.btnGoto.setVisibility(View.GONE);
+            holder.showDateTime.setVisibility(View.GONE);
 
             //Toast.makeText(activity, "Custom ID: " +customID, Toast.LENGTH_SHORT).show();
             boolean downloadAndroidPDF = message.startsWith("Download Android");
             boolean downloadFlutterPDF = message.startsWith("Download Flutter");
             boolean forMarks = message.startsWith("Click the button below to open view marks");
             boolean forAttendance = message.startsWith("Click the button below to view attendance");
+            boolean forDateTime = message.startsWith("Today's date and time is");
             if(downloadAndroidPDF) {
                 Log.d("androidPDF" ,"Download Android PDF");
                 holder.btnDownloadPDF.setText("Download Android PDF");
@@ -90,12 +94,26 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.MyViewHolder> 
             } else {
                 holder.btnGoto.setVisibility(View.GONE);
             }
+            if(forDateTime) {
+                Calendar calendar = Calendar.getInstance();
+                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("EEEE, dd-MMM-yyyy hh:mm:ss a");
+                String dateTime = simpleDateFormat.format(calendar.getTime());
+                holder.showDateTime.setText(dateTime);
+                holder.showDateTime.setVisibility(View.VISIBLE);
+            } else {
+                holder.showDateTime.setVisibility(View.GONE);
+            }
         } else {
             holder.messageSend.setVisibility(View.VISIBLE);
             holder.messageReceive.setVisibility(View.GONE);
             holder.messageSend.setText(message);
             holder.btnDownloadPDF.setVisibility(View.GONE);
             holder.btnGoto.setVisibility(View.GONE);
+            Calendar calendar = Calendar.getInstance();
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("EEEE, dd-MMM-yyyy hh:mm:ss a");
+            String dateTime = simpleDateFormat.format(calendar.getTime());
+            holder.showDateTime.setText(dateTime);
+            holder.showDateTime.setVisibility(View.GONE);
 //            boolean downloadAndroidPDF = message.startsWith("Download Android");
 //            if(downloadAndroidPDF) {
 //                Log.d("androidPDF" ,"Download Android PDF");
@@ -167,6 +185,7 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.MyViewHolder> 
 
         TextView messageSend;
         TextView messageReceive;
+        TextView showDateTime;
         Button btnDownloadPDF;
         Button btnGoto;
 
@@ -176,6 +195,7 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.MyViewHolder> 
             messageReceive = itemView.findViewById(R.id.message_receive);
             btnDownloadPDF = itemView.findViewById(R.id.btnDownloadPDF);
             btnGoto = itemView.findViewById(R.id.btnGoto);
+            showDateTime = itemView.findViewById(R.id.tvShowDateTime);
         }
     }
 }

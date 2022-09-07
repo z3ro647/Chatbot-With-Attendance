@@ -20,9 +20,12 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.Objects;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -69,12 +72,20 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
     private Button btnFirebase;
     private TextView tvForgotPassword;
 
+    private TextView mTimeText;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         //btnChatBot = findViewById(R.id.btnChatBot);
         //btnDemoInsert = findViewById(R.id.btnDemoInsert);
+
+        Calendar calendar = Calendar.getInstance();
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("EEEE, dd-MMM-yyyy hh:mm:ss a");
+        String dateTime = simpleDateFormat.format(calendar.getTime());
+        mTimeText = findViewById(R.id.mTimeText);
+        mTimeText.setText(dateTime);
 
 //        ParseQuery<ParseObject> query = ParseQuery.getQuery("FirstClass");
 //        query.orderByDescending("createdAt");
