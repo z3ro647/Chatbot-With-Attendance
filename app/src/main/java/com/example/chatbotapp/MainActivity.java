@@ -1,14 +1,16 @@
 package com.example.chatbotapp;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
-import android.database.Cursor;
-import android.net.Uri;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.text.format.DateFormat;
 import android.util.Log;
@@ -20,25 +22,29 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
-import java.util.Locale;
 import java.util.Objects;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
-import java.util.concurrent.atomic.AtomicReference;
 
-import com.example.chatbotapp.back4app.OnLineDatabaseHelper;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.chatbotapp.databasehelpers.ChatAppDatabaseHelper;
-import com.example.chatbotapp.models.UsersModel;
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
-public class MainActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener  {
+
+public class MainActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener {
 
     private Button btnChatBot;
     private Button btnBtn;
@@ -74,6 +80,8 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
 
     private TextView mTimeText;
 
+    private FusedLocationProviderClient fusedLocationProviderClient;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -81,11 +89,23 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
         //btnChatBot = findViewById(R.id.btnChatBot);
         //btnDemoInsert = findViewById(R.id.btnDemoInsert);
 
-        Calendar calendar = Calendar.getInstance();
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("EEEE, dd-MMM-yyyy hh:mm:ss a");
-        String dateTime = simpleDateFormat.format(calendar.getTime());
-        mTimeText = findViewById(R.id.mTimeText);
-        mTimeText.setText(dateTime);
+        if (ContextCompat.checkSelfPermission(MainActivity.this,
+                Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED){
+            if (ActivityCompat.shouldShowRequestPermissionRationale(MainActivity.this,
+                    Manifest.permission.ACCESS_FINE_LOCATION)){
+                ActivityCompat.requestPermissions(MainActivity.this,
+                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+            }else{
+                ActivityCompat.requestPermissions(MainActivity.this,
+                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+            }
+        }
+
+//        Calendar calendar = Calendar.getInstance();
+//        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("EEEE, dd-MMM-yyyy hh:mm:ss a");
+//        String dateTime = simpleDateFormat.format(calendar.getTime());
+//        mTimeText = findViewById(R.id.mTimeText);
+//        mTimeText.setText(dateTime);
 
 //        ParseQuery<ParseObject> query = ParseQuery.getQuery("FirstClass");
 //        query.orderByDescending("createdAt");
@@ -282,15 +302,17 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
             }
         });
 
+        displayWeather();
+
         btnSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 AtomicBoolean userFound = new AtomicBoolean(false);
                 AtomicInteger position = new AtomicInteger();
                 String name = "";
-                if(etPhone.getText().toString().isEmpty() || etPassword.getText().toString().isEmpty()) {
+                if (etPhone.getText().toString().isEmpty() || etPassword.getText().toString().isEmpty()) {
                     Toast.makeText(MainActivity.this, "Phone or Password can not be empty.", Toast.LENGTH_SHORT).show();
-                } else if(etPhone.getText().toString().equals("123") && etPassword.getText().toString().equals("admin")) {
+                } else if (etPhone.getText().toString().equals("123") && etPassword.getText().toString().equals("admin")) {
                     //startActivity(new Intent(MainActivity.this, AdminDashboardScreen.class));
                     Intent i = new Intent(MainActivity.this, AdminDashboardScreen.class);
                     finishAffinity();
@@ -298,40 +320,37 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
                 } else {
                     ParseQuery<ParseObject> query = ParseQuery.getQuery("AppUser");
                     query.findInBackground((objects, e) -> {
-                        Log.d("Length","Length is: "+objects.size());
+                        Log.d("Length", "Length is: " + objects.size());
                         if (e == null) {
                             for (int i = 0; i < objects.size(); i++) {
                                 ParseObject object = objects.get(i);
                                 Log.d("Phone and Password", "Phone: " + object.getString("phone") + ", Password: " + object.getString("password") + ", at: " + i);
-                                if(Objects.equals(object.getString("phone"), etPhone.getText().toString()) && Objects.equals(object.getString("password"), etPassword.getText().toString())) {
+                                if (Objects.equals(object.getString("phone"), etPhone.getText().toString()) && Objects.equals(object.getString("password"), etPassword.getText().toString())) {
                                     //Toast.makeText(MainActivity.this, "User Phone Found", Toast.LENGTH_SHORT).show();
                                     userFound.set(true);
-                                    if(Objects.equals(object.getString("role"), "Student")) {
+                                    if (Objects.equals(object.getString("role"), "Student")) {
                                         Intent intent = new Intent(MainActivity.this, StudentDashboardScreen.class);
                                         intent.putExtra("customID", object.getString("customID"));
                                         intent.putExtra("batch", object.getString("batch"));
                                         startActivity(intent);
-                                    }
-                                    else if (Objects.equals(object.getString("role"), "Parent")) {
+                                    } else if (Objects.equals(object.getString("role"), "Parent")) {
                                         Intent intent = new Intent(MainActivity.this, ParentDashboardScreen.class);
                                         intent.putExtra("customID", object.getString("customID"));
                                         intent.putExtra("batch", object.getString("batch"));
                                         startActivity(intent);
-                                    }
-                                    else if (Objects.equals(object.getString("role"), "Teacher")) {
+                                    } else if (Objects.equals(object.getString("role"), "Teacher")) {
                                         startActivity(new Intent(MainActivity.this, AdminDashboardScreen.class));
-                                    }
-                                    else {
+                                    } else {
                                         startActivity(new Intent(MainActivity.this, AdminDashboardScreen.class));
                                     }
                                     break;
                                 }
                             }
-                            if(!userFound.get()) {
+                            if (!userFound.get()) {
                                 Toast.makeText(MainActivity.this, "User Phone not Found", Toast.LENGTH_SHORT).show();
                             }
                         } else {
-                            Log.d("Error value of E","This is the error: "+e.getMessage().toString());
+                            Log.d("Error value of E", "This is the error: " + e.getMessage().toString());
                         }
                     });
 //                    Cursor cursor = chatAppDatabaseHelper.searchOneUserPhoneAndPassword(etPhone.getText().toString(), etPassword.getText().toString());
@@ -425,7 +444,6 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
 //        });
 
 
-
 //        btnBtn.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View view) {
@@ -467,7 +485,89 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
 //        });
     }
 
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                                           int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        switch (requestCode) {
+            case 1: {
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    if (ContextCompat.checkSelfPermission(MainActivity.this,
+                            Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+                        Toast.makeText(this, "Permission Granted", Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    Toast.makeText(this, "Permission Denied", Toast.LENGTH_SHORT).show();
+                }
+                return;
+            }
+        }
+    }
 
+    public void displayWeather() {
+        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
+        // Weather url to get JSON
+        String weather_url1 = "";
+
+        // Api id for url
+        String api_id1 = "6c90fc2f0d6746a7819e63a35ada9f8f";
+        //https://api.weatherbit.io/v2.0/current?lat=28.156901&lon=84.061078&key=6c90fc2f0d6746a7819e63a35ada9f8f
+
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return;
+        }
+        fusedLocationProviderClient.getLastLocation().addOnSuccessListener(location -> getTemp(location.getLatitude(), location.getLongitude()));
+    }
+
+    public void getTemp(double lat, double log) {
+        // Api id for url
+        String api_id1 = "6c90fc2f0d6746a7819e63a35ada9f8f";
+        String weatherUrl1 = "https://api.weatherbit.io/v2.0/current?" + "lat=" + lat + "&lon=" + log + "&key=" + api_id1;
+        RequestQueue queue = Volley.newRequestQueue(this);
+        String url = weatherUrl1;
+        JsonObjectRequest
+                jsonObjectRequest
+                = new JsonObjectRequest(
+                Request.Method.GET,
+                url,
+                null,
+                new Response.Listener() {
+                    @Override
+                    public void onResponse(Object response) {
+                        Log.d("Response", response.toString());
+                        // get the JSON object
+                        try {
+                            JSONObject object = new JSONObject(String.valueOf(response));
+                            // get the Array from obj of name - "data"
+                            JSONArray arr = object.getJSONArray("data");
+                            Log.d("Data", arr.toString());
+                            // get the JSON object from the
+                            // array at index position 0
+                            JSONObject data = arr.getJSONObject(0);
+                            Log.d("City Name", data.getString("city_name"));
+                            Log.d("Average Temp", data.getString("app_temp"));
+                            JSONObject arr1 = data.getJSONObject("weather");
+                            Log.d("Description", arr1.getString("description"));
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error)
+                    {
+                    }
+                });
+        queue.add(jsonObjectRequest);
+    }
 
     @Override
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
